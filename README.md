@@ -5,15 +5,18 @@ My Nix configuration files
 
 Has a .nix file per machine.
 
-`ln -s <path/to/repo/machines/<machine> /etc/nixos/configuration.nix`
+`ln -s <path/to/nix-config/machines/<machine> /etc/nixos/configuration.nix`
 
 ## Users
 
 Has a .nix file per user.
 
-`ln -s <path/to/repo/users/<user> /home/<user>/.nixpkgs/config.nix`
+`ln -s <path/to/nix-config/users/<user> /home/<user>/.nixpkgs/config.nix`
 
 ## Packages
 
 Has expressions with package collections.
 
+## Shells
+
+Has expressions that can be used with `nix-shell`.
