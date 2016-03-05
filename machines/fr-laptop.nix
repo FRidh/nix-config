@@ -24,6 +24,12 @@
 
   networking.hostName = "fr-laptop"; # Define your hostname.
   networking.networkmanager.enable = true;
+  networking.networkmanager.packages = with pkgs; [
+    networkmanager_pptp
+    networkmanager_l2tp
+    networkmanager_vpnc
+    networkmanager_openconnect
+  ];
   networking.firewall = {
     enable = true;
     allowedUDPPorts = [ 27036 ]; # Steam
@@ -34,9 +40,17 @@
   hardware.pulseaudio = {
     enable = true;
     support32Bit = true;
+    package = pkgs.pulseaudioFull;
   };
   hardware.bluetooth.enable = true;
-  hardware.opengl.driSupport32Bit = true;
+
+  # OpenGL
+  hardware.opengl = {
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
+    extraPackages32 = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
+  };  
 
   virtualisation.virtualbox.host.enable = true;
   services.locate.enable = true;
@@ -44,7 +58,7 @@
   programs.man.enable = true;
 
   # Disable because of KDE/Qt bug with Plasma 5.
-  fonts.fontconfig.ultimate.enable = false;
+  fonts.fontconfig.ultimate.enable = true;
 
   nix = {
     binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "headcounter.org:/7YANMvnQnyvcVB6rgFTdb8p5LG1OTXaO+21CaOSBzg=" ];
@@ -96,10 +110,10 @@
   };
 
   # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.kdm.enable = true;
-  #services.xserver.displayManager.sddm.enable = true;
-  #services.xserver.desktopManager.kde5.enable = true;
-  services.xserver.desktopManager.kde4.enable = true;
+  #services.xserver.displayManager.kdm.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.kde5.enable = true;
+  #services.xserver.desktopManager.kde4.enable = true;
   #services.xserver.windowManager.i3.enable = true;
 
   services.sabnzbd.enable = true;
@@ -125,6 +139,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    ardour
     audacity
 #    busybox
     chromium
@@ -133,6 +148,7 @@
     nox
     flac
     firefox-wrapper
+    ffmpeg
     gdb
     git
     git-cola
@@ -140,8 +156,9 @@
     graphviz
     gnumake
     google-chrome
+    jack2Full
     lame
-    #libreoffice
+    libreoffice
     lm_sensors
     mendeley
     mysql
@@ -151,38 +168,43 @@
     pandoc
     pavucontrol
     pciutils
+    #pidgin
+    (pidgin-with-plugins.override { plugins = [ pidginsipe pidgin-skypeweb ];})
     psmisc
+    qjackctl
     samba
     skype
     spotify
+    sshfsFuse
     sstp # vpn Chalmers
-    steam
+    #steam
 #    texLiveFull
-#   texlive.combined.scheme-medium
+    texlive.combined.scheme-full
 #    tex-collection
-    (texlive.combine {
-      inherit (texlive) scheme-medium preprint todonotes;
-    })
+#    (texlive.combine {
+#      inherit (texlive) biblatex scheme-medium preprint logreq emptypage todonotes mathdesign units ly1;
+#    })
+    texmaker
     tmux
     usbutils
     wget
     vlc_qt5
     zip
     unzip
-   ] ++ pkgs.callPackage ../packages/kde-packages.nix { kdeVersion=4;};
+   ] ++ pkgs.callPackage ../packages/kde-packages.nix { kdeVersion=5;};
 
-
-   system.extraDependencies = pkgs.callPackage ../packages/common-packages.nix { pythonPackages=pkgs.python35Packages; };
+   # Packages that should be available in the store but not in the system profile.
+   system.extraDependencies = with pkgs; [ python27Packages.ipython python27Packages.sympy ] ++ pkgs.callPackage ../packages/common-packages.nix { pythonPackages=pkgs.python35Packages; };
 
   # Musnix real-time audio
   # https://github.com/musnix/musnix
   musnix = {
-    enable = true;
-    #ffado.enable = true;
+    enable = false;
+    #ffado.enable = true; # Broken, error: attribute ‘ffado’ missing
     kernel.optimize = true;
     kernel.realtime = true;
     #kernel.packages = pkgs.linuxPackages_latest_rt;
-    kernel.packages = pkgs.linuxPackages_4_1_rt;
+    kernel.packages = pkgs.linuxPackages_4_4_rt;
     rtirq.enable = true;
     das_watchdog.enable = true;
   };

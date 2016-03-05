@@ -17,5 +17,13 @@ with pkgs; [
     kde4.konversation
     kde4.kile
 ] ++ stdenv.lib.optionals (kdeVersion==5) [
+    kde5.ark
+    kde5.gwenview
+    kde5.kate
+    kde5.kdeconnect
+    kde5.kile
+    kde5.konversation
+    kde5.spectacle
     kde5.plasma-desktop
+    kde4.kolourpaint
 ]

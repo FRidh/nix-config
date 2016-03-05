@@ -6,6 +6,8 @@ with pythonPackages; [
     cython
     cytoolz
     dill
+    ipython
+    ipywidgets
 #    jupyter
     line_profiler
     matplotlib
@@ -31,5 +33,5 @@ with pythonPackages; [
     sphinx
     statsmodels
     toolz
-#    xarray
+    xarray
   ]
