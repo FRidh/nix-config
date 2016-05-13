@@ -6,6 +6,7 @@ with pythonPackages; [
     cython
     cytoolz
     dill
+    ghp-import
     ipython
     ipywidgets
 #    jupyter
@@ -23,7 +24,11 @@ with pythonPackages; [
     pyaudio
     pyfftw
 #    pyqt4
-#    pytest
+#    pyqt5
+#    pyside
+#    pysoundfile
+    pytest
+    pytest_xdist
 #    qtconsole
     #scikitlearn
     scipy 
@@ -32,6 +37,7 @@ with pythonPackages; [
 #    sounddevice
     sphinx
     statsmodels
+#    sympy
     toolz
     xarray
   ]

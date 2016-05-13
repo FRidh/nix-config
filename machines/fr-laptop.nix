@@ -1,3 +1,4 @@
+
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
@@ -31,7 +32,7 @@
     networkmanager_openconnect
   ];
   networking.firewall = {
-    enable = true;
+    enable = false;
     allowedUDPPorts = [ 27036 ]; # Steam
     allowedTCPPortRanges = [ { from = 1714; to = 1764; } ]; # kdeconnect
     allowedUDPPortRanges = [ { from = 1714; to = 1764; } ]; # kdeconnect
@@ -53,7 +54,10 @@
   };  
 
   virtualisation.virtualbox.host.enable = true;
-  services.locate.enable = true;
+  services.locate = {
+    enable = true;
+    interval = "hourly";
+  };
   services.telepathy.enable = true;
   programs.man.enable = true;
 
@@ -80,6 +84,7 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
+#  time.timeZone = "America/New_York";
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -119,12 +124,18 @@
   services.sabnzbd.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.freddy = {
-    isNormalUser = true;
-    #uid = 1000;
-    home = "/home/freddy";
-    description = "Frederik Rietdijk";
-    extraGroups = [ "wheel" "networkmanager" "audio" ];
+  users.extraUsers = {
+    freddy = {
+      isNormalUser = true;
+      #uid = 1000;
+      home = "/home/freddy";
+      description = "Frederik Rietdijk";
+      extraGroups = [ "wheel" "networkmanager" "audio" ];
+    };
+    test = {
+      isNormalUser = true;
+      home = "/home/test/";
+    };
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
@@ -141,8 +152,9 @@
   environment.systemPackages = with pkgs; [
     ardour
     audacity
+    awscli
 #    busybox
-    chromium
+#    chromium
     iftop
     iotop
     nox
@@ -150,12 +162,16 @@
     firefox-wrapper
     ffmpeg
     gdb
+    ghostscript
     git
     git-cola
     gparted
     graphviz
     gnumake
     google-chrome
+    gitAndTools.hub # GitHub extension to git
+    imagemagick
+    inkscape
     jack2Full
     lame
     libreoffice
@@ -163,6 +179,7 @@
     mendeley
     mysql
     nix-prefetch-scripts
+    #octave
     openttd
     openssl
     pandoc
@@ -198,16 +215,16 @@
 
   # Musnix real-time audio
   # https://github.com/musnix/musnix
-  musnix = {
-    enable = false;
-    #ffado.enable = true; # Broken, error: attribute ‘ffado’ missing
-    kernel.optimize = true;
-    kernel.realtime = true;
-    #kernel.packages = pkgs.linuxPackages_latest_rt;
-    kernel.packages = pkgs.linuxPackages_4_4_rt;
-    rtirq.enable = true;
-    das_watchdog.enable = true;
-  };
+ # musnix = {
+ #   enable = false;
+  #  #ffado.enable = true; # Broken, error: attribute ‘ffado’ missing
+  #  kernel.optimize = true;
+  #  kernel.realtime = true;
+  #  #kernel.packages = pkgs.linuxPackages_latest_rt;
+  #  kernel.packages = pkgs.linuxPackages_4_4_rt;
+  #  rtirq.enable = true;
+  #  das_watchdog.enable = true;
+  #};
 
 }
 

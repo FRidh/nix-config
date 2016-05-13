@@ -26,4 +26,7 @@ with pkgs; [
     kde5.spectacle
     kde5.plasma-desktop
     kde4.kolourpaint
+    kde5.kdesu
+    kde5.okular
+    kde5.yakuake
 ]
