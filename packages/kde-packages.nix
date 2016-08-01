@@ -29,4 +29,6 @@ with pkgs; [
     kde5.kdesu
     kde5.okular
     kde5.yakuake
+    kde5.kompare
+    kde5.filelight
 ]

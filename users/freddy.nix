@@ -28,12 +28,9 @@ with <nixpkgs> {};
         ];
     };
 
-    blogEnv = pkgs.myEnvFun {
-        name = "blog";
-        buildInputs = with python35Packages; [
-          python35
-          python35Packages.pelican
-        ];
-    };
+    blogEnv = python35.withPackages (ps: [ps.pelican]);
+    mailEnv = python27.withPackages (ps: with ps; [pyyaml offlineimap ]);
+    
   };
+
 }

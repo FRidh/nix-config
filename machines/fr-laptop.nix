@@ -1,4 +1,5 @@
 
+
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
@@ -21,7 +22,7 @@
   boot.tmpOnTmpfs = true;
   boot.cleanTmpDir = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_4_4;
+  boot.kernelPackages = pkgs.linuxPackages_4_6;
 
   networking.hostName = "fr-laptop"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -49,16 +50,25 @@
   hardware.opengl = {
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
-    extraPackages32 = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
+#    extraPackages = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
+#    extraPackages32 = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
   };  
 
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableHardening = false;
   services.locate = {
     enable = true;
     interval = "hourly";
   };
   services.telepathy.enable = true;
+
+  # TLP Linux Advanced Power Management
+  services.tlp.enable = true;
+
+  #services.bumblebeed.enable = true;
+  #services.nvidiaOptimus.disable = false;
+
+
   programs.man.enable = true;
 
   # Disable because of KDE/Qt bug with Plasma 5.
@@ -70,9 +80,10 @@
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
+      restrict-eval = false
     '';
     nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
-    useChroot = true;
+    useSandbox = true;
   };
 
   # Select internationalisation properties.
@@ -100,7 +111,7 @@
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = [ pkgs.gutenprint pkgs.hplipWithPlugin ];
+    gutenprint = true; #drivers = [ pkgs.gutenprint pkgs.hplipWithPlugin ];
   };
 
   # Enable the X11 windowing system.
@@ -115,11 +126,10 @@
   };
 
   # Enable the KDE Desktop Environment.
-  #services.xserver.displayManager.kdm.enable = true;
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.kde5.enable = true;
-  #services.xserver.desktopManager.kde4.enable = true;
-  #services.xserver.windowManager.i3.enable = true;
+# services.xserver.windowManager.i3.enable = true;  
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   services.sabnzbd.enable = true;
 
@@ -130,7 +140,7 @@
       #uid = 1000;
       home = "/home/freddy";
       description = "Frederik Rietdijk";
-      extraGroups = [ "wheel" "networkmanager" "audio" ];
+      extraGroups = [ "wheel" "networkmanager" "audio" "vboxusers" ];
     };
     test = {
       isNormalUser = true;
@@ -149,17 +159,22 @@
     };
   };
 
+  # To fix nix-shell with certificates
+  environment.variables."SSL_CERT_FILE" = "/etc/ssl/certs/ca-bundle.crt";
+
   environment.systemPackages = with pkgs; [
-    ardour
+    #ardour
     audacity
     awscli
-#    busybox
-#    chromium
+    #busybox
+    #chromium
+    cups_filters
     iftop
     iotop
     nox
     flac
-    firefox-wrapper
+    #firefox
+    firefox-bin
     ffmpeg
     gdb
     ghostscript
@@ -171,10 +186,10 @@
     google-chrome
     gitAndTools.hub # GitHub extension to git
     imagemagick
-    inkscape
-    jack2Full
+    #inkscape
+ #   jack2Full
     lame
-    libreoffice
+    #libreoffice
     lm_sensors
     mendeley
     mysql
@@ -182,13 +197,15 @@
     #octave
     openttd
     openssl
-    pandoc
+    #pandoc
     pavucontrol
     pciutils
     #pidgin
-    (pidgin-with-plugins.override { plugins = [ pidginsipe pidgin-skypeweb ];})
+    #(pidgin-with-plugins.override { plugins = [ pidginsipe pidgin-skypeweb ];})
     psmisc
-    qjackctl
+    # Default Python environment
+    (python35Packages.python.withPackages (ps: callPackage ../packages/common-python-packages.nix { pythonPackages = ps; }))
+#    qjackctl
     samba
     skype
     spotify
@@ -201,17 +218,18 @@
 #    (texlive.combine {
 #      inherit (texlive) biblatex scheme-medium preprint logreq emptypage todonotes mathdesign units ly1;
 #    })
-    texmaker
+ #   texmaker
     tmux
     usbutils
     wget
     vlc_qt5
     zip
     unzip
-   ] ++ pkgs.callPackage ../packages/kde-packages.nix { kdeVersion=5;};
-
+   ] 
+   # KDE
+   ++ callPackage ../packages/kde-packages.nix { kdeVersion=5;};
    # Packages that should be available in the store but not in the system profile.
-   system.extraDependencies = with pkgs; [ python27Packages.ipython python27Packages.sympy ] ++ pkgs.callPackage ../packages/common-packages.nix { pythonPackages=pkgs.python35Packages; };
+   #system.extraDependencies = pkgs.callPackage ../packages/common-python-packages.nix { pythonPackages=pkgs.python35Packages; };
 
   # Musnix real-time audio
   # https://github.com/musnix/musnix

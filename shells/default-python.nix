@@ -6,6 +6,6 @@ with import <nixpkgs> {};
 
 in pkgs.${python}.buildEnv.override rec {
 
-  extraLibs = import ./../packages/common-packages.nix { pkgs=pkgs; pythonPackages=pythonPackages; };
+  extraLibs = import ./../packages/common-python-packages.nix { inherit pythonPackages; };
 }
 ).env
