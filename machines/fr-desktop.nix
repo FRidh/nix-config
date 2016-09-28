@@ -20,7 +20,7 @@
 #  boot.loader.efi.efibootmgr.enable = true;
  boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_4_4;
+  boot.kernelPackages = pkgs.linuxPackages_4_7;
 
   nix = {
     binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "headcounter.org:/7YANMvnQnyvcVB6rgFTdb8p5LG1OTXaO+21CaOSBzg=" ];
@@ -30,7 +30,7 @@
       gc-keep-derivations = true
     '';
     nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
-    useChroot = true;
+    useSandbox = true;
     maxJobs = 4;
   };
 
@@ -60,6 +60,8 @@
   # };
   hardware.bluetooth.enable = true;
 
+  programs.man.enable = true;
+
   nixpkgs.config = {
     allowUnfree = true;
     firefox = {
@@ -68,18 +70,28 @@
     };
   };
 
+  # To fix nix-shell with certificates
+  environment.variables."SSL_CERT_FILE" = "/etc/ssl/certs/ca-bundle.crt";
+
+
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    #chromium
+    iftop
+    iotop
+    ffmpeg
     firefox-bin
     git
     git-cola
-    #google-chrome
+    gitAndTools.hub
+    google-chrome
     iftop
     iotop    
+    nox
     openttd
     pavucontrol
     spotify
@@ -89,7 +101,8 @@
     wget
     vlc_qt5
     zip
-  ];
+  ] ++ callPackage ../packages/kde-packages.nix { kdeVersion=5;};
+
 
   # List services that you want to enable:
 
@@ -109,6 +122,18 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.kde5.enable = true;
 
+  services.sabnzbd.enable = true;
+
+  services.locate = {
+    enable = true;
+    interval = "hourly";
+  };
+
+  services.telepathy.enable = true;
+
+  # TLP Linux Advanced Power Management
+  services.tlp.enable = true;
+
   users.extraUsers.freddy = {
     isNormalUser = true;
     uid = 1000;
@@ -127,3 +152,4 @@
   system.stateVersion = "16.09";
 
 }
+

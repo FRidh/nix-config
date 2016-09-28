@@ -2,7 +2,7 @@ with <nixpkgs> {};
 {
 
   allowUnfree = true;
-#  allowBroken = true;
+  allowBroken = false;
 
   packageOverrides = pkgs: with pkgs; {
 
