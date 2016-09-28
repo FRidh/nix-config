@@ -20,15 +20,15 @@ with pkgs; [
     kde5.ark
     kde5.gwenview
     kde5.kate
-    kde5.kdeconnect
-    kde5.kile
-    kde5.konversation
+    kdeconnect
+    kile
+    konversation
     kde5.spectacle
     kde5.plasma-desktop
     kde4.kolourpaint
     kde5.kdesu
     kde5.okular
-    kde5.yakuake
+    yakuake
     kde5.kompare
     kde5.filelight
 ]

@@ -6,7 +6,17 @@
 
 { config, pkgs, stdenv, ... }:
 
+let
 
+  pythonEnv = (pkgs.python35Packages.python.withPackages (ps: pkgs.callPackage ../packages/common-python-packages.nix { pythonPackages = ps; }));
+  mypkgs = pkgs.callPackage ../packages {};
+#  texEnv = with pkgs.texlive; (combine { scheme-full=scheme-full; empaposter=mypkgs.local.texlive.empaposter;});
+ texEnv = pkgs.texlive.combined.scheme-full;
+#    (texlive.combine {
+#      inherit (texlive) biblatex scheme-medium preprint logreq emptypage todonotes mathdesign units ly1;
+#    })
+
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -23,6 +33,8 @@
   boot.cleanTmpDir = true;
 
   boot.kernelPackages = pkgs.linuxPackages_4_6;
+
+#  boot.plymouth.enable = true;
 
   networking.hostName = "fr-laptop"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -65,10 +77,11 @@
   # TLP Linux Advanced Power Management
   services.tlp.enable = true;
 
+  # nVidia Bumblebee
   #services.bumblebeed.enable = true;
   #services.nvidiaOptimus.disable = false;
 
-
+  # Man pages
   programs.man.enable = true;
 
   # Disable because of KDE/Qt bug with Plasma 5.
@@ -83,7 +96,7 @@
       restrict-eval = false
     '';
     nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
-    useSandbox = true;
+    useSandbox = false;
   };
 
   # Select internationalisation properties.
@@ -189,7 +202,7 @@
     #inkscape
  #   jack2Full
     lame
-    #libreoffice
+    libreoffice
     lm_sensors
     mendeley
     mysql
@@ -204,7 +217,7 @@
     #(pidgin-with-plugins.override { plugins = [ pidginsipe pidgin-skypeweb ];})
     psmisc
     # Default Python environment
-    (python35Packages.python.withPackages (ps: callPackage ../packages/common-python-packages.nix { pythonPackages = ps; }))
+    pythonEnv
 #    qjackctl
     samba
     skype
@@ -212,12 +225,6 @@
     sshfsFuse
     sstp # vpn Chalmers
     #steam
-#    texLiveFull
-    texlive.combined.scheme-full
-#    tex-collection
-#    (texlive.combine {
-#      inherit (texlive) biblatex scheme-medium preprint logreq emptypage todonotes mathdesign units ly1;
-#    })
  #   texmaker
     tmux
     usbutils
@@ -226,6 +233,7 @@
     zip
     unzip
    ] 
+   ++ [ pythonEnv texEnv ]
    # KDE
    ++ callPackage ../packages/kde-packages.nix { kdeVersion=5;};
    # Packages that should be available in the store but not in the system profile.
