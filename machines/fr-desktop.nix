@@ -20,7 +20,7 @@
 #  boot.loader.efi.efibootmgr.enable = true;
  boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_4_7;
+  #boot.kernelPackages = pkgs.linuxPackages_4_7;
 
   nix = {
     binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "headcounter.org:/7YANMvnQnyvcVB6rgFTdb8p5LG1OTXaO+21CaOSBzg=" ];
@@ -32,6 +32,7 @@
     nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
     useSandbox = true;
     maxJobs = 4;
+  #  package = pkgs.nixMaster;
   };
 
   networking.hostName = "fr-desktop"; # Define your hostname.
@@ -40,6 +41,8 @@
   '';
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
+
+  networking.firewall.enable = false;
 
   hardware.pulseaudio = {
     enable = true;
@@ -73,6 +76,13 @@
   # To fix nix-shell with certificates
   environment.variables."SSL_CERT_FILE" = "/etc/ssl/certs/ca-bundle.crt";
 
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish.enable = true;
+    publish.addresses = true;
+    publish.workstation = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -80,6 +90,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    atom
     #chromium
     iftop
     iotop
