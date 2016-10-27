@@ -2,6 +2,7 @@
 
 with pythonPackages; [
     blaze
+    bokeh
     bottleneck
     cython
     cytoolz
@@ -39,6 +40,8 @@ with pythonPackages; [
     statsmodels
 #    sympy
     toolz
+    twine
+    virtualenv
     wheel
     xarray
   ]
