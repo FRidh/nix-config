@@ -8,8 +8,8 @@
 
 let
 
-  pythonEnv = (pkgs.python35Packages.python.withPackages (ps: pkgs.callPackage ../packages/common-python-packages.nix { pythonPackages = ps; }));
-  mypkgs = pkgs.callPackage ../packages {};
+  #pythonEnv = (pkgs.python35Packages.python.withPackages (ps: pkgs.callPackage ../packages/common-python-packages.nix { pythonPackages = ps; }));
+#  mypkgs = pkgs.callPackage ../packages {};
 #  texEnv = with pkgs.texlive; (combine { scheme-full=scheme-full; empaposter=mypkgs.local.texlive.empaposter;});
  texEnv = pkgs.texlive.combined.scheme-full;
 #    (texlive.combine {
@@ -32,7 +32,7 @@ in
   boot.tmpOnTmpfs = true;
   boot.cleanTmpDir = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_4_6;
+  boot.kernelPackages = pkgs.linuxPackages_4_7;
 
 #  boot.plymouth.enable = true;
 
@@ -96,7 +96,7 @@ in
       restrict-eval = false
     '';
     nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
-    useSandbox = false;
+    useSandbox = true;
   };
 
   # Select internationalisation properties.
@@ -121,6 +121,14 @@ in
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish.enable = true;
+    publish.addresses = true;
+    publish.workstation = true;
+  };
+
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
@@ -144,7 +152,7 @@ in
 # services.xserver.windowManager.i3.enable = true;  
   services.xserver.videoDrivers = [ "modesetting" ];
 
-  services.sabnzbd.enable = true;
+  services.sabnzbd.enable = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers = {
@@ -217,7 +225,7 @@ in
     #(pidgin-with-plugins.override { plugins = [ pidginsipe pidgin-skypeweb ];})
     psmisc
     # Default Python environment
-    pythonEnv
+#    pythonEnv
 #    qjackctl
     samba
     skype
@@ -233,7 +241,7 @@ in
     zip
     unzip
    ] 
-   ++ [ pythonEnv texEnv ]
+   ++ [ texEnv ]
    # KDE
    ++ callPackage ../packages/kde-packages.nix { kdeVersion=5;};
    # Packages that should be available in the store but not in the system profile.
