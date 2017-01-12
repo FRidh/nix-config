@@ -2,8 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+#let
+#  nixUnstable = lib.overrideDerivation pkgs.nixUnstable( attrs: {
+#    src = pkgs.fetchFromGitHub {
+#      owner = "NixOS";
+#      repo = "nix";
+#      rev = "4be4f6de56f4de77f6a376f1a40ed75eb641bb89";
+#      sha256 = "0icvbwpca1jh8qkdlayxspdxl5fb0qjjd1kn74x6gs6iy66kndq6";
+#    };
+#  });
+#in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -32,7 +42,7 @@
     nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
     useSandbox = true;
     maxJobs = 4;
-  #  package = pkgs.nixMaster;
+ #   package = nixUnstable;
   };
 
   networking.hostName = "fr-desktop"; # Define your hostname.
@@ -45,6 +55,10 @@
     enable = true;
     support32Bit = true;
     package = pkgs.pulseaudioFull;
+    zeroconf.discovery.enable = true;
+    zeroconf.publish.enable = true;
+    tcp.enable = true;
+    tcp.anonymousClients.allowAll = true;
   };
 
   hardware.opengl = {
@@ -98,7 +112,9 @@
     gitAndTools.hub
     google-chrome
     iftop
-    iotop    
+    iotop
+    nix-prefetch-scripts
+    nix-repl
     nox
     openttd
     pavucontrol
@@ -116,6 +132,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.forwardX11 = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -157,7 +174,7 @@
   # };
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "16.09";
+  # system.stateVersion = "16.09";
 
 }
 
