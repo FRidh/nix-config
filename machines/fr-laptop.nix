@@ -32,7 +32,7 @@ in
   boot.tmpOnTmpfs = true;
   boot.cleanTmpDir = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_4_7;
+#  boot.kernelPackages = pkgs.linuxPackages_4_7;
 
 #  boot.plymouth.enable = true;
 
