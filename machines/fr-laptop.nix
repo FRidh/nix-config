@@ -180,7 +180,8 @@ in
     allowUnfree = true;
     firefox = {
       enableGoogleTalkPlugin = true;
-      enableAdobeFlash = true;
+#      enableAdobeFlash = true;
+      jre = true;
     };
   };
 
@@ -203,7 +204,7 @@ in
     ffmpeg
     gdb
     ghostscript
-    git
+    gitFull
     git-cola
     gparted
     graphviz
@@ -212,7 +213,7 @@ in
     gitAndTools.hub # GitHub extension to git
     imagemagick
     #inkscape
- #   jack2Full
+    jack2Full
     lame
     libreoffice
     lm_sensors
@@ -223,7 +224,8 @@ in
     openttd
     openssl
     #pandoc
-    pavucontrol
+    paprefs # Pulesaudio conf
+    pavucontrol # Pulseaudio control
     pciutils
     #pidgin
     #(pidgin-with-plugins.override { plugins = [ pidginsipe pidgin-skypeweb ];})
