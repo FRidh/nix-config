@@ -103,6 +103,8 @@
   environment.systemPackages = with pkgs; [
     atom
     #chromium
+    binutils
+    diffoscope
     iftop
     iotop
     ffmpeg
@@ -113,6 +115,7 @@
     google-chrome
     iftop
     iotop
+    ktorrent
     nix-prefetch-scripts
     nix-repl
     nox
