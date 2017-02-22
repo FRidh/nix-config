@@ -39,6 +39,7 @@ with pythonPackages; [
     sphinx
     statsmodels
 #    sympy
+    tkinter
     toolz
     twine
     virtualenv
