@@ -55,6 +55,10 @@ in
     enable = true;
     support32Bit = true;
     package = pkgs.pulseaudioFull;
+    tcp.enable = true;
+    tcp.anonymousClients.allowAll = true;
+    zeroconf.discovery.enable = true;
+    zeroconf.publish.enable = true;
   };
   hardware.bluetooth.enable = true;
 
