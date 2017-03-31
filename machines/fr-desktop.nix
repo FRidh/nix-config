@@ -76,6 +76,9 @@
 
   programs.man.enable = true;
 
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableHardening = false;
+
   nixpkgs.config = {
     allowUnfree = true;
     firefox = {
@@ -104,12 +107,12 @@
     atom
     #chromium
     binutils
-    diffoscope
+    #diffoscope
     iftop
     iotop
     ffmpeg
     firefox-bin
-    git
+    gitFull
     git-cola
     gitAndTools.hub
     google-chrome
@@ -123,12 +126,12 @@
     pavucontrol
     spotify
     steam
-    tmux 
+    tmux
     unzip
     wget
     vlc_qt5
     zip
-  ] ++ callPackage ../packages/kde-packages.nix { kdeVersion=5;};
+  ] ++ callPackage ../packages/kde-packages.nix { };
 
 
   # List services that you want to enable:
@@ -148,7 +151,7 @@
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.kde5.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   services.sabnzbd.enable = true;
 

@@ -152,7 +152,7 @@ in
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.kde5.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 # services.xserver.windowManager.i3.enable = true;  
   services.xserver.videoDrivers = [ "modesetting" ];
 
@@ -249,7 +249,7 @@ in
    ] 
    ++ [ texEnv ]
    # KDE
-   ++ callPackage ../packages/kde-packages.nix { kdeVersion=5;};
+   ++ callPackage ../packages/kde-packages.nix { };
    # Packages that should be available in the store but not in the system profile.
    #system.extraDependencies = pkgs.callPackage ../packages/common-python-packages.nix { pythonPackages=pkgs.python35Packages; };
 
