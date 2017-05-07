@@ -28,7 +28,9 @@
 #  boot.loader.gummiboot.enable = true;
   boot.loader.systemd-boot.enable = true;
 #  boot.loader.efi.efibootmgr.enable = true;
- boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  programs.command-not-found.enable = true;
 
   #boot.kernelPackages = pkgs.linuxPackages_4_7;
 
