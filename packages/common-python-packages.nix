@@ -1,6 +1,7 @@
-{ pythonPackages }:
+{ }:
 
-with pythonPackages; [
+ps: with ps; [
+    acoustics
     blaze
     bokeh
     bottleneck
@@ -38,7 +39,7 @@ with pythonPackages; [
 #    sounddevice
     sphinx
     statsmodels
-#    sympy
+    sympy
     tkinter
     toolz
     twine

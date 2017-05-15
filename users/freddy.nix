@@ -6,7 +6,7 @@ with <nixpkgs> {};
 
   packageOverrides = pkgs: with pkgs; {
 
-    mypkgs = pkgs.callPackage ../packages { pythonPackages = python35Packages; };
+    mypkgs = pkgs.callPackage ../packages { };
 #     inherit (mypkgs) pythonEnv;
 
     ## Example environments. Using nix-shell instead.
