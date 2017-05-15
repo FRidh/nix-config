@@ -247,7 +247,7 @@ in
     zip
     unzip
    ] 
-   ++ [ texEnv ]
+   ++ [ texEnv biber ]
    # KDE
    ++ callPackage ../packages/kde-packages.nix { };
    # Packages that should be available in the store but not in the system profile.
