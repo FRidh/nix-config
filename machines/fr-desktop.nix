@@ -29,8 +29,10 @@
   boot.loader.systemd-boot.enable = true;
 #  boot.loader.efi.efibootmgr.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.tmpOnTmpfs = true;
+  boot.cleanTmpDir = true;
 
-  programs.command-not-found.enable = true;
+  #programs.command-not-found.enable = true;
 
   #boot.kernelPackages = pkgs.linuxPackages_4_7;
 
@@ -44,7 +46,7 @@
     nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
     useSandbox = true;
     maxJobs = 4;
- #   package = nixUnstable;
+    package = pkgs.nixUnstable;
   };
 
   networking.hostName = "fr-desktop"; # Define your hostname.
@@ -174,6 +176,11 @@
     description = "Frederik Rietdijk";
     extraGroups = [ "wheel" "networkmanager" "audio" ];
   };
+
+  users.extraUsers.nix-builder-home = {
+    isNormalUser = true;
+    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCcl9KaDNV58UPTrtGRcqVEhhrMWfRDlixY13Eq9tbzi/2Wukl9Wxyq32/Li/Wb8OCfy5/YKd54DJYxO6NNEpB5sbrSuHKamzvcf860Ka8dSnkNOcgcW7/cb6oLeG7mi8hxVoxEEflbakVj019aZ9pp4VKvujcF8Vz9ZiSgH5B+Yr550xPy2/TwyLEnsJOgExP/zvZOjCGHc4KomtH/sfVrO4in7NXzoB5wYBTk7mrOchBPpoITGPTT6BG7DRzHHArXbnuEqFxht3HGvE/FLmdri28u/WN8uzWKxrpG1UTjLavByX/uc7DOepQwsFmEnsIgKJ/9d6iNNuyE91+hd/Ej root@fr-laptop" ];
+  }; 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # users.extraUsers.guest = {
