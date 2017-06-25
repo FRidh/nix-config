@@ -1,5 +1,3 @@
-
-
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
@@ -82,8 +80,9 @@ in
   services.tlp.enable = true;
 
   # nVidia Bumblebee
-  #services.bumblebeed.enable = true;
-  #services.nvidiaOptimus.disable = false;
+  hardware.bumblebee.enable = false;
+  hardware.bumblebee.connectDisplay = false;
+  hardware.nvidiaOptimus.disable = true;
 
   # Man pages
   programs.man.enable = true;
@@ -93,14 +92,26 @@ in
 
   nix = {
     binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "headcounter.org:/7YANMvnQnyvcVB6rgFTdb8p5LG1OTXaO+21CaOSBzg=" ];
-    trustedBinaryCaches = [ "https://hydra.nixos.org/" "https://headcounter.org/hydra/" ];
+    trustedBinaryCaches = [ "https://hydra.nixos.org/" "https://headcounter.org/hydra/" "178.249.150.224" ];
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
       restrict-eval = false
     '';
     nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
+    package = pkgs.nixUnstable;
     useSandbox = true;
+
+    buildMachines = [
+      { hostName = "178.249.150.224";
+        sshUser = "nix-builder-home";
+        sshKey = "/root/.ssh/nix-builder-home";
+        system = "x86_64-linux";
+        maxJobs = 4;
+      }
+    ];
+    distributedBuilds = true;
+    requireSignedBinaryCaches = false;
   };
 
   # Select internationalisation properties.
@@ -190,6 +201,9 @@ in
 
   environment.systemPackages = with pkgs; [
     #ardour
+    aspell
+    aspellDicts.en
+    (hunspellWithDicts [hunspellDicts.en-us hunspellDicts.en-gb-ise])
     audacity
     awscli
     #busybox
@@ -205,6 +219,7 @@ in
     gdb
     ghostscript
     gitFull
+    git-lfs
     git-cola
     gparted
     graphviz
@@ -223,7 +238,7 @@ in
     #octave
     openttd
     openssl
-    #pandoc
+    pandoc
     paprefs # Pulesaudio conf
     pavucontrol # Pulseaudio control
     pciutils
@@ -246,6 +261,7 @@ in
     vlc_qt5
     zip
     unzip
+    kdeApplications.l10n.en_GB.qt4
    ] 
    ++ [ texEnv biber ]
    # KDE
