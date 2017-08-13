@@ -261,11 +261,26 @@ in
     vlc_qt5
     zip
     unzip
+    # KDE packages
+    ark
+    gwenview
+    kate
+    kdeconnect
+    kile
+    konversation
+    spectacle
+    plasma-desktop
+    #kolourpaint
+    kdesu
+    okular
+    yakuake
+    kompare
+    filelight
     kdeApplications.l10n.en_GB.qt4
-   ] 
-   ++ [ texEnv biber ]
-   # KDE
-   ++ callPackage ../packages/kde-packages.nix { };
+    # LaTeX
+    texEnv
+    biber
+  ];
    # Packages that should be available in the store but not in the system profile.
    #system.extraDependencies = pkgs.callPackage ../packages/common-python-packages.nix { pythonPackages=pkgs.python35Packages; };
 

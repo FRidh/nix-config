@@ -135,8 +135,22 @@
     wget
     vlc_qt5
     zip
-  ] ++ callPackage ../packages/kde-packages.nix { };
-
+    # KDE packages
+    ark
+    gwenview
+    kate
+    kdeconnect
+    kile
+    konversation
+    spectacle
+    plasma-desktop
+    #kolourpaint
+    kdesu
+    okular
+    yakuake
+    kompare
+    filelight
+  ];
 
   # List services that you want to enable:
 
