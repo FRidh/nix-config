@@ -80,8 +80,8 @@
 
   programs.man.enable = true;
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableHardening = false;
+  #virtualisation.virtualbox.host.enable = true;
+  #virtualisation.virtualbox.host.enableHardening = false;
 
   nixpkgs.config = {
     allowUnfree = true;
