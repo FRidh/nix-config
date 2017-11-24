@@ -125,6 +125,7 @@
     iftop
     iotop
     ktorrent
+    niff
     nix-prefetch-scripts
     nix-repl
     nox
@@ -139,6 +140,7 @@
     zip
     # KDE packages
     ark
+    fish
     gwenview
     kate
     kdeconnect
@@ -146,7 +148,7 @@
     konversation
     spectacle
     plasma-desktop
-    #kolourpaint
+    kolourpaint
     kdesu
     okular
     yakuake
