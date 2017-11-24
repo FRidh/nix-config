@@ -43,7 +43,7 @@
       gc-keep-outputs = true
       gc-keep-derivations = true
     '';
-    nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
+    #nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
     useSandbox = true;
     maxJobs = 4;
     package = pkgs.nixUnstable;
@@ -186,6 +186,12 @@
 
   # TLP Linux Advanced Power Management
   services.tlp.enable = true;
+
+  system.autoUpgrade = {
+    channel = "https://nixos.org/channels/nixos-17.09";
+    dates = "19:30";
+    enable = true;
+  };
 
   users.extraUsers.freddy = {
     isNormalUser = true;
