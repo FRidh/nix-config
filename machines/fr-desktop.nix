@@ -91,6 +91,8 @@
     };
   };
 
+  programs.fish.enable = true;
+
   # To fix nix-shell with certificates
   environment.variables."SSL_CERT_FILE" = "/etc/ssl/certs/ca-bundle.crt";
 
@@ -185,6 +187,7 @@
 
   users.extraUsers.freddy = {
     isNormalUser = true;
+    shell = pkgs.fish;
     uid = 1000;
     home = "/home/freddy";
     description = "Frederik Rietdijk";
