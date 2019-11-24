@@ -3,6 +3,7 @@ with <nixpkgs> {};
 
   allowUnfree = true;
   allowBroken = false;
+  allowUnsupportedSystem = true;
 
   packageOverrides = pkgs: with pkgs; {
 

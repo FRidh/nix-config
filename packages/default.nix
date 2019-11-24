@@ -14,11 +14,11 @@ rec {
 
   pythonEnv = let
     python = pkgs.python3.override {
-      # Use packages as specified in remote repository.
-#       packageOverrides = remote.sets.auralisation.stableOverrides;
-      # Use packages as specified in local repository.
-      packageOverrides = local.sets.auralisation.stableOverrides;
-      # Use packages as specified locally.
+#      # Use packages as specified in remote repository.
+       packageOverrides = remote.sets.auralisation.stableOverrides;
+#      # Use packages as specified in local repository.
+#      packageOverrides = local.sets.auralisation.stableOverrides;
+#      # Use packages as specified locally.
 #       packageOverrides = local.overrides.python;
     };
   in python.withPackages common-python-packages;
@@ -34,7 +34,7 @@ rec {
     turbulence = super.callPackage ~/Code/libraries/turbulence { };
   };
 
-  local.sets.auralisation = pkgs.callPackage ~/Code/libraries/auralisation-nix { };
+  # local.sets.auralisation = pkgs.callPackage ~/Code/libraries/auralisation-nix { };
 
   remote.sets.auralisation = (import (fetchTarballFromGitHub {
     owner = "FRidh";

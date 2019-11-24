@@ -2,7 +2,7 @@
 
 ps: with ps; [
     acoustics
-    auraliser
+#    auraliser
     blaze
     bokeh
     bottleneck
@@ -41,6 +41,7 @@ ps: with ps; [
 #    sounddevice
     sphinx
 #     statsmodels
+    streaming
 #     sympy
     tkinter
     toolz
