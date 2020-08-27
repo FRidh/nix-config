@@ -42,15 +42,17 @@
   nix = {
     binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "headcounter.org:/7YANMvnQnyvcVB6rgFTdb8p5LG1OTXaO+21CaOSBzg=" ];
     trustedBinaryCaches = [ "https://hydra.nixos.org/" "https://headcounter.org/hydra/" ];
+    trustedUsers = [ "root" "freddy" ];
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
+      experimental-features = nix-command flakes ca-references
     '';
     #nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
 #    useSandbox = "relaxed";
     buildCores = 4;
 #    maxJobs = 4;
-#    package = pkgs.nixUnstable;
+    package = pkgs.nixFlakes;
   };
 
   networking.hostName = "fr-desktop"; # Define your hostname.
@@ -87,18 +89,19 @@
   # };
 #  hardware.bluetooth.enable = true;
 
-  programs.man.enable = true;
+  documentation.man.enable = true;
 
  # virtualisation.virtualbox.host.enable = true;
   #virtualisation.virtualbox.host.enableHardening = false;
+  # virtualisation.docker.enable = true;
 
-  virtualisation.docker.enable = true;
+#  virtualisation.anbox.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;
   };
 
-  programs.fish.enable = true;
+  # programs.fish.enable = true;
 
   # To fix nix-shell with certificates
   environment.variables."SSL_CERT_FILE" = "/etc/ssl/certs/ca-bundle.crt";
@@ -116,6 +119,8 @@
 
   # Collect data such as IO stats
   services.sysstat.enable = true;
+
+  services.ntp.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -136,12 +141,13 @@
     bfs
     binutils
     #cachix
-    diffoscope
+    #diffoscope
     iftop
     iotop
     ffmpeg
     file
     firefox-bin
+    fzf # fuzzy finder
     gitFull
     git-cola
     gitAndTools.hub
@@ -152,11 +158,11 @@
     imagemagick
     iotop
     jq
-#    libreoffice
+    libreoffice
     ktorrent
 #    niff
 #    nix-bash-completion
-    nix-prefetch-scripts
+#    nix-prefetch-scripts
 #     nix-repl
     nix-review
 #    nox
@@ -165,12 +171,14 @@
 #    pandoc
     pavucontrol
     psmisc
-    (python3.withPackages(ps: with ps; [ ipython notebook numpy toolz pytest ]))
+    (python3.withPackages(ps: with ps; [ ipython notebook jupyterlab numpy toolz pytest pandas holoviews hvplot matplotlib panel ]))
+    lm_sensors
     sshfs
     spotify
     steam
     steam-run
 #    (texlive.combined.scheme-medium)
+    teams
     tmux
     unzip
     wget
@@ -214,7 +222,77 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-  services.sabnzbd.enable = true;
+  systemd.services.code-server = {
+    enable = true;
+    description = "Remote VSCode Server";
+    after = ["network.target"];
+    wantedBy = ["multi-user.target"];
+    path = [ pkgs.go pkgs.git pkgs.direnv ];
+
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.code-server}/bin/code-server";
+      WorkingDirectory = "/home/freddy";
+      NoNewPrivileges = true;
+      User = "freddy";
+      Group = "nogroup";
+    };
+  };
+
+
+  # services.xrdp.enable = true;
+
+  # services.sabnzbd.enable = true;
+
+  #services.gitea.enable = true;
+
+  # services.postgresql = {
+  #   enable = true;
+  #   ensureDatabases = [ "hydra" ];
+  #   ensureUsers = [
+  #     {
+  #       name = "hydra";
+  #       ensurePermissions = {
+  #         "DATABASE hydra" = "ALL PRIVILEGES";
+  #       };
+  #     }
+  #     {
+  #       name = "hydra-www";
+  #       ensurePermissions = {
+  #         "DATABASE hydra" = "ALL PRIVILEGES";
+  #       };
+  #     }
+  #     {
+  #       name = "root";
+  #       ensurePermissions = {
+  #         "DATABASE hydra" = "ALL PRIVILEGES";
+  #       };
+  #     }
+  #   ];
+  # };
+
+  # services.hydra = let
+  #   package = (pkgs.hydra.override {darcs=null; mercurial=null; subversion=null;}).overrideAttrs(oldAttrs: {
+  #     # version = "2020-03-13";
+  #     # src = pkgs.fetchFromGitHub {
+  #     #   owner = "NixOS";
+  #     #   repo = "hydra";
+  #     #   rev = "be0ec2d22332d382781d7f45f474b57ad0f5c411";
+  #     #   sha256 = "sha256:0c6mvyqa62hhg1bvnp6khk2k6iyvwvyzjj5aksikh03qssik7a1a";
+  #     # };
+  #   });
+  # in {
+  #   enable = true;
+  #   dbi = "dbi:Pg:dbname=hydra;user=hydra;";
+  #   inherit package;
+  #   hydraURL = "https://hydra.fridh.nl";
+  #   notificationSender = "hydra@fridh.nl";
+  # };
+
+  # services.octoprint = {
+  #   enable = true;
+  #   plugins = ps: with ps; [m33-fio];
+  # };
 
 #   services.jupyter = {
 #     enable = true;
