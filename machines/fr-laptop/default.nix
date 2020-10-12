@@ -74,6 +74,8 @@ in
 #    extraPackages32 = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
   };  
 
+  powerManagement.enable = true;
+
   #virtualisation.virtualbox.host.enable = true;
   #virtualisation.virtualbox.host.enableHardening = false;
   services.locate = {
@@ -190,7 +192,7 @@ in
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  # system.stateVersion = "15.09";
+  system.stateVersion = "20.09";
   
   nixpkgs.config = {
     allowUnfree = true;
