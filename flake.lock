@@ -2,17 +2,16 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1600358528,
-        "narHash": "sha256-NGJfCHZNmaVjIAjpRubMznJtYZMMHBFfIM5QftaDtJk=",
-        "ref": "HEAD",
-        "rev": "170ce1595ec5bd599fd3c993089af9d9563231e0",
-        "revCount": 243851,
-        "type": "git",
-        "url": "file:///home/freddy/Code/libraries/nixpkgs"
+        "lastModified": 1602230526,
+        "narHash": "sha256-3/ucBPYg42P+1ji5/7q227Ek/Eq2C7zeiB9sZl5UpIY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "0b8799ecaaf0dc6b4c11583a3c96ca5b40fcfdfb",
+        "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "master",
+        "ref": "nixos-20.09",
         "repo": "nixpkgs",
         "type": "github"
       }
