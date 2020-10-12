@@ -4,8 +4,8 @@ ps: with ps; [
     acoustics
 #    auraliser
     blaze
-    bokeh
-    bottleneck
+#     bokeh
+#     bottleneck
     cython
     cytoolz
     dill
@@ -17,7 +17,7 @@ ps: with ps; [
     matplotlib
     memory_profiler
     nbconvert
-    nose
+#     nose
     notebook
     numba
     numexpr
@@ -34,7 +34,7 @@ ps: with ps; [
     pytest
     pytest_xdist
 #    qtconsole
-    scikitlearn
+#     scikitlearn
     scipy
     seaborn
     setuptools
@@ -45,8 +45,8 @@ ps: with ps; [
 #     sympy
     tkinter
     toolz
-    twine
-    virtualenv
+#     twine
+#     virtualenv
     wheel
-#     xarray
+#    xarray
   ]

@@ -9,7 +9,7 @@ let
   #pythonEnv = (pkgs.python35Packages.python.withPackages (ps: pkgs.callPackage ../packages/common-python-packages.nix { pythonPackages = ps; }));
 #  mypkgs = pkgs.callPackage ../packages {};
 #  texEnv = with pkgs.texlive; (combine { scheme-full=scheme-full; empaposter=mypkgs.local.texlive.empaposter;});
- texEnv = pkgs.texlive.combined.scheme-full;
+# texEnv = pkgs.texlive.combined.scheme-full;
 #    (texlive.combine {
 #      inherit (texlive) biblatex scheme-medium preprint logreq emptypage todonotes mathdesign units ly1;
 #    })
@@ -30,20 +30,26 @@ in
   boot.tmpOnTmpfs = true;
   boot.cleanTmpDir = true;
 
+  # wifi authentication timeout
+  # https://ubuntuforums.org/showthread.php?t=2235768
+  boot.extraModprobeConfig = ''
+    options iwlwifi 11n_disable=1 wd_disable=1
+  '';
+
 #  boot.kernelPackages = pkgs.linuxPackages_4_7;
 
 #  boot.plymouth.enable = true;
 
   networking.hostName = "fr-laptop"; # Define your hostname.
   networking.networkmanager.enable = true;
-  networking.networkmanager.packages = with pkgs; [
-    networkmanager_pptp
-    networkmanager_l2tp
-    networkmanager_vpnc
-    networkmanager_openconnect
-  ];
+#  networking.networkmanager.packages = with pkgs; [
+#    networkmanager_pptp
+#    networkmanager_l2tp
+#    networkmanager_vpnc
+#    networkmanager_openconnect
+#  ];
   networking.firewall = {
-    enable = false;
+    enable = true;
     allowedUDPPorts = [ 27036 ]; # Steam
     allowedTCPPortRanges = [ { from = 1714; to = 1764; } ]; # kdeconnect
     allowedUDPPortRanges = [ { from = 1714; to = 1764; } ]; # kdeconnect
@@ -68,8 +74,8 @@ in
 #    extraPackages32 = with pkgs; [ vaapiIntel libvdpau-va-gl vaapiVdpau ];
   };  
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableHardening = false;
+  #virtualisation.virtualbox.host.enable = true;
+  #virtualisation.virtualbox.host.enableHardening = false;
   services.locate = {
     enable = true;
     interval = "hourly";
@@ -88,7 +94,7 @@ in
   programs.man.enable = true;
 
   # Disable because of KDE/Qt bug with Plasma 5.
-  fonts.fontconfig.ultimate.enable = true;
+  #fonts.fontconfig.ultimate.enable = true;
 
   nix = {
     binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "headcounter.org:/7YANMvnQnyvcVB6rgFTdb8p5LG1OTXaO+21CaOSBzg=" ];
@@ -96,21 +102,20 @@ in
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
-      restrict-eval = false
     '';
-    nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
+    #nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
     package = pkgs.nixUnstable;
     useSandbox = true;
 
-    buildMachines = [
-      { hostName = "178.249.150.224";
-        sshUser = "nix-builder-home";
-        sshKey = "/root/.ssh/nix-builder-home";
-        system = "x86_64-linux";
-        maxJobs = 4;
-      }
-    ];
-    distributedBuilds = true;
+    #buildMachines = [
+    #  { hostName = "178.249.150.224";
+    #    sshUser = "nix-builder-home";
+    #    sshKey = "/root/.ssh/nix-builder-home";
+    #    system = "x86_64-linux";
+    #    maxJobs = 4;
+    #  }
+    #];
+    distributedBuilds = false;
     requireSignedBinaryCaches = false;
   };
 
@@ -145,21 +150,21 @@ in
   };
 
   # Enable CUPS to print documents.
-  services.printing = {
-    enable = true;
-    gutenprint = true; #drivers = [ pkgs.gutenprint pkgs.hplipWithPlugin ];
-  };
+#  services.printing = {
+#    enable = true;
+#    gutenprint = true; #drivers = [ pkgs.gutenprint pkgs.hplipWithPlugin ];
+#  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
-  services.xserver.synaptics = {
-    enable = true;
-    twoFingerScroll = true;
-    tapButtons = true;
-    fingersMap = [1 3 2];
-  };
+  #services.xserver.synaptics = {
+  #  enable = true;
+  #  twoFingerScroll = true;
+  #  tapButtons = true;
+  #  fingersMap = [1 3 2];
+  #};
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -167,7 +172,7 @@ in
 # services.xserver.windowManager.i3.enable = true;  
   services.xserver.videoDrivers = [ "modesetting" ];
 
-  services.sabnzbd.enable = false;
+  #services.sabnzbd.enable = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers = {
@@ -178,10 +183,10 @@ in
       description = "Frederik Rietdijk";
       extraGroups = [ "wheel" "networkmanager" "audio" "vboxusers" ];
     };
-    test = {
-      isNormalUser = true;
-      home = "/home/test/";
-    };
+  #  test = {
+  #    isNormalUser = true;
+  #    home = "/home/test/";
+  #  };
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
@@ -189,58 +194,59 @@ in
   
   nixpkgs.config = {
     allowUnfree = true;
-    firefox = {
-      enableGoogleTalkPlugin = true;
+#    firefox = {
+#      enableGoogleTalkPlugin = true;
 #      enableAdobeFlash = true;
-      jre = true;
-    };
+      #jre = true;
+#    };
   };
 
   # To fix nix-shell with certificates
-  environment.variables."SSL_CERT_FILE" = "/etc/ssl/certs/ca-bundle.crt";
+ # environment.variables."SSL_CERT_FILE" = "/etc/ssl/certs/ca-bundle.crt";
 
   environment.systemPackages = with pkgs; [
     #ardour
-    aspell
-    aspellDicts.en
-    (hunspellWithDicts [hunspellDicts.en-us hunspellDicts.en-gb-ise])
-    audacity
-    awscli
+#    aspell
+#    aspellDicts.en
+#    (hunspellWithDicts [hunspellDicts.en-us hunspellDicts.en-gb-ise])
+#    audacity
+#    awscli
     #busybox
     #chromium
-    cups_filters
+    #cups_filters
+    #exfat
     iftop
     iotop
-    nox
-    flac
+#    nox
+    #flac
     #firefox
     firefox-bin
-    ffmpeg
-    gdb
-    ghostscript
+    #ffmpeg
+    #gdb
+    #ghostscript
     gitFull
-    git-lfs
+    #git-lfs
     git-cola
-    gparted
-    graphviz
+    #gparted
+    #graphviz
     gnumake
-    google-chrome
+    #google-chrome
     gitAndTools.hub # GitHub extension to git
-    imagemagick
+    #imagemagick
     #inkscape
-    jack2Full
-    lame
+#    jack2Full
+#    lame
     libreoffice
     lm_sensors
-    mendeley
-    mysql
-    nix-prefetch-scripts
+#    mendeley
+#    mysql
+#    nix-prefetch-scripts
     #octave
     openttd
-    openssl
+ #   openssl
     pandoc
-    paprefs # Pulesaudio conf
-    pavucontrol # Pulseaudio control
+    #paprefs # Pulesaudio conf
+    #pavucontrol # Pulseaudio control
     pciutils
     #pidgin
     #(pidgin-with-plugins.override { plugins = [ pidginsipe pidgin-skypeweb ];})
@@ -248,17 +254,18 @@ in
     # Default Python environment
 #    pythonEnv
 #    qjackctl
-    samba
-    skype
+ #   samba
+#    skype
     spotify
-    sshfsFuse
-    sstp # vpn Chalmers
-    #steam
+    vscode
+    #sshfsFuse
+    #sstp # vpn Chalmers
+#    steam
  #   texmaker
     tmux
-    usbutils
+    #usbutils
     wget
-    vlc_qt5
+    #vlc_qt5
     zip
     unzip
     # KDE packages
@@ -266,20 +273,20 @@ in
     gwenview
     kate
     kdeconnect
-    kile
+   # kile
     konversation
     spectacle
     plasma-desktop
-    #kolourpaint
+    kolourpaint
     kdesu
     okular
     yakuake
     kompare
     filelight
-    kdeApplications.l10n.en_GB.qt4
+#    kdeApplications.l10n.en_GB.qt4
     # LaTeX
-    texEnv
-    biber
+    #texEnv
+    #biber
   ];
    # Packages that should be available in the store but not in the system profile.
    #system.extraDependencies = pkgs.callPackage ../packages/common-python-packages.nix { pythonPackages=pkgs.python35Packages; };
