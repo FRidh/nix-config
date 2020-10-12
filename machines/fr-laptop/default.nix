@@ -18,8 +18,8 @@ in
 {
   imports =
     [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-      ./../../musnix
+      ./hardware-configuration.nix
+      #./../../musnix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -91,7 +91,7 @@ in
   hardware.nvidiaOptimus.disable = true;
 
   # Man pages
-  programs.man.enable = true;
+  documentation.man.enable = true;
 
   # Disable because of KDE/Qt bug with Plasma 5.
   #fonts.fontconfig.ultimate.enable = true;
@@ -102,10 +102,10 @@ in
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
+      experimental-features = nix-command flakes ca-references
     '';
     #nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
     package = pkgs.nixUnstable;
-    useSandbox = true;
 
     #buildMachines = [
     #  { hostName = "178.249.150.224";
@@ -115,8 +115,8 @@ in
     #    maxJobs = 4;
     #  }
     #];
-    distributedBuilds = false;
-    requireSignedBinaryCaches = false;
+    #distributedBuilds = false;
+    #requireSignedBinaryCaches = false;
   };
 
   # Select internationalisation properties.
