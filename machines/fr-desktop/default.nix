@@ -52,7 +52,7 @@
 #    useSandbox = "relaxed";
     buildCores = 8;
     maxJobs = 8;
-    package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable;
   };
 
   networking.hostName = "fr-desktop"; # Define your hostname.
