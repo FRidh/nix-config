@@ -32,7 +32,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.tmpOnTmpfs = true;
   boot.cleanTmpDir = true;
-  #boot.devSize = "10GB";
+  boot.devSize = "20GB";
 
   #programs.command-not-found.enable = true;
   programs.tmux.enable = true;
@@ -50,8 +50,8 @@
     '';
     #nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
 #    useSandbox = "relaxed";
-    buildCores = 4;
-#    maxJobs = 4;
+    buildCores = 8;
+    maxJobs = 8;
     package = pkgs.nixFlakes;
   };
 
@@ -79,7 +79,7 @@
     extraPackages = with pkgs; [ vaapiVdpau ];
   };
 
-#  hardware.nvidia.package = config.boot.kernelPackages.nvidia_x11; # _legacy304;
+  #hardware.nvidia.package = config.boot.kernelPackages.nvidia_x11_legacy390; # _legacy304;
 
   # Select internationalisation properties.
   # i18n = {
@@ -160,6 +160,7 @@
     jq
     libreoffice
     ktorrent
+    kwin-tiling
 #    niff
 #    nix-bash-completion
 #    nix-prefetch-scripts
@@ -239,6 +240,13 @@
     };
   };
 
+  #services.codimd = {
+  #  enable = true;
+  #  configuration.db = {
+  #    dialect = "sqlite";
+  #    storage = "/var/lib/codimd/db.codimd.sqlite";
+  #  };
+  #};
 
   # services.xrdp.enable = true;
 

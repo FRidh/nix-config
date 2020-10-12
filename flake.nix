@@ -2,7 +2,9 @@
   description = "Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
+#    nixpkgs.url = "github:WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
+    #nixpkgs.url = "git+https://github.com/WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
     #flake-utils.url = "github:numtide/flake-utils";
   };
 
