@@ -12,7 +12,10 @@
 
     nixosConfigurations."fr-desktop" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ (import ./machines/fr-desktop/default.nix) ];
+      modules = [
+        (import ./machines/fr-desktop/default.nix)
+        #(builtins.toPath "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+      ];
       specialArgs = { inherit inputs; };
     };
 
