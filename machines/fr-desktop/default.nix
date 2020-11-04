@@ -197,7 +197,6 @@
     spectacle
     plasma-desktop
     kolourpaint
-    kdesu
     okular
     yakuake
     kompare
