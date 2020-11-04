@@ -351,9 +351,13 @@
   services.tlp.enable = true;
 
   system.autoUpgrade = {
-    channel = "https://nixos.org/channels/nixos-unstable";
+    #channel = "https://nixos.org/channels/nixos-unstable";
     dates = "19:30";
-    enable = false;
+    enable = true;
+    flake = "github:FRidh/nix-config";
+    flags = [
+      "--update-input nixpkgs" # Integrate latest nixpkgs during update.
+    ];
   };
 
   users.extraUsers.freddy = {
