@@ -357,6 +357,7 @@
     flake = "github:FRidh/nix-config";
     flags = [
       "--update-input nixpkgs" # Integrate latest nixpkgs during update.
+      "--no-write-lock-file" # Cannot write lock file when updating like this.
     ];
   };
 
