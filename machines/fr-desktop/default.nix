@@ -222,22 +222,22 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-  systemd.services.code-server = {
-    enable = true;
-    description = "Remote VSCode Server";
-    after = ["network.target"];
-    wantedBy = ["multi-user.target"];
-    path = [ pkgs.go pkgs.git pkgs.direnv ];
+  #systemd.services.code-server = {
+  #  enable = true;
+  #  description = "Remote VSCode Server";
+  #  after = ["network.target"];
+  #  wantedBy = ["multi-user.target"];
+  #  path = [ pkgs.go pkgs.git pkgs.direnv ];
 
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.code-server}/bin/code-server";
-      WorkingDirectory = "/home/freddy";
-      NoNewPrivileges = true;
-      User = "freddy";
-      Group = "nogroup";
-    };
-  };
+  #  serviceConfig = {
+  #    Type = "simple";
+  #    ExecStart = "${pkgs.code-server}/bin/code-server";
+  #    WorkingDirectory = "/home/freddy";
+  #    NoNewPrivileges = true;
+  #    User = "freddy";
+  #    Group = "nogroup";
+  #  };
+  #};
 
   #services.codimd = {
   #  enable = true;
