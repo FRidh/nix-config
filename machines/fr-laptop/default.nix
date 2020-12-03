@@ -231,27 +231,28 @@ in
     git-cola
     #gparted
     #graphviz
-    gnumake
+    #gnumake
     #google-chrome
     gitAndTools.hub # GitHub extension to git
     #imagemagick
     #inkscape
 #    jack2Full
 #    lame
-    libreoffice
+    #libreoffice
     lm_sensors
 #    mendeley
 #    mysql
 #    nix-prefetch-scripts
     #octave
-    openttd
+    #openttd
  #   openssl
-    pandoc
+    #pandoc
     #paprefs # Pulesaudio conf
     #pavucontrol # Pulseaudio control
     pciutils
     #pidgin
     #(pidgin-with-plugins.override { plugins = [ pidginsipe pidgin-skypeweb ];})
+    powerdevil
     psmisc
     # Default Python environment
 #    pythonEnv
@@ -259,7 +260,7 @@ in
  #   samba
 #    skype
     spotify
-    vscode
+    #vscode
     #sshfsFuse
     #sstp # vpn Chalmers
 #    steam
@@ -280,7 +281,7 @@ in
     spectacle
     plasma-desktop
     kolourpaint
-    kdesu
+    #kdesu
     okular
     yakuake
     kompare
