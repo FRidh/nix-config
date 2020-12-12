@@ -3,12 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-20.09";
     #nixpkgs.url = "github:WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
     #nixpkgs.url = "git+https://github.com/WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
     #flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs } @ inputs: rec {
+  outputs = { self, nixpkgs, nixpkgs-stable } @ inputs: rec {
 
     nixosConfigurations."fr-desktop" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -22,6 +23,18 @@
     nixosConfigurations."fr-laptop" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [ (import ./machines/fr-laptop/default.nix) ];
+      specialArgs = { inherit inputs; };
+    };
+
+    nixosConfigurations."server2" = let
+      nixpkgs = nixpkgs-stable;
+      inputs = inputs // {nixpkgs = nixpkgs-stable;};
+    in nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        (import ./machines/server2/default.nix)
+        (builtins.toPath "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix")
+      ];
       specialArgs = { inherit inputs; };
     };
 
