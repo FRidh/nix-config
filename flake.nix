@@ -27,8 +27,8 @@
     };
 
     nixosConfigurations."server2" = let
-      nixpkgs = nixpkgs-stable;
-      inputs = inputs // {nixpkgs = nixpkgs-stable;};
+      #nixpkgs = nixpkgs-stable;
+      #inputs = inputs // {inherit nixpkgs;};
     in nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
