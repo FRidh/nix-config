@@ -102,6 +102,8 @@
     openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDK4gaPIK9ZXYsSGcIGUX+Ryf6LGc1N26NreOBe6aUqE7aCMsmzpDQnuH8HN6xocNIZ9zCT3X5J4QCh35JQab6BxehVbHkWmdN4xUyp18EIaNmtt1YpPEXzri4lUy3QCEnqpmiXfuoWPp54Rcr2bBiihdoozYa5wHfnzZzMgVbyM3HWcwLhqisycUoyAPvR7/YOSMz28ltGgVaL9dpLcIfy+NGm6U+cVhFM+8GdYPZj8VAtllN4obtnw6rTHjOcERR2Ju5j6Ecz4mBpvVaTWbYm3fbmaRLmnYDqz5+hK7By/BU3IzN+nM8zMgLVo2lpO2nB9/rBMnD/FSonKySUzriPfUV+fPrV/OrBuUNsoyu6j/3psqn+f0te+7f/vnO+qOdJ6TqpSjMW/VXNNUYuu1gp7dZAZJoOf47kLMb4S/1bsv0iVE4+8/gIAjTkbEnIBdfFnziHlinTfR6OscEubnLuaOM0pcx/HnOSGCslaJGJzCPA89Xc0ORWRBIn9QB/ntfUmM4rwcXIB4LhOx2cSpqCDTtLE5r1c2vunu3z9AqgXVnLwRDmUN9MvscQvu+s/cRe3oHG8NRQ/lrqwLukXcEHOhmVK8J6CP7EuDIyTpF1Hro5r8ZYJpAGKWqol59O8g90gtWkNRsj/+hOrGCmS3tWrZOBzBmfJ9VgkZ39lo602w== freddyrietdijk@fridh.nl" ];
   };
 
+  services.tailscale.enable = true;
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
