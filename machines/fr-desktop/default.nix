@@ -122,6 +122,15 @@
 
   services.ntp.enable = true;
 
+  # Running out of file descriptors
+  # https://github.com/NixOS/nixpkgs/issues/101459#issuecomment-758306434
+  security.pam.loginLimits = [{
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "4096";
+    }];
+
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
