@@ -34,6 +34,10 @@
   boot.cleanTmpDir = true;
   boot.devSize = "20GB";
 
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+  ];
+
   #programs.command-not-found.enable = true;
   programs.tmux.enable = true;
 
@@ -128,7 +132,7 @@
       domain = "*";
       type = "soft";
       item = "nofile";
-      value = "4096";
+      value = "65536";
     }];
 
   # Set your time zone.
