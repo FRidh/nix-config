@@ -2,27 +2,22 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1615532953,
-        "narHash": "sha256-SWpaGjrp/INzorEqMz3HLi6Uuk9I0KAn4YS8B4n3q5g=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "916ee862e87ac5ee2439f2fb7856386b4dc906ae",
-        "type": "github"
+        "narHash": "sha256-Tnn7XYODT4gEz5JCKYc8p1oaOWveROe0dASl8KNKM8s=",
+        "path": "/home/freddy/Code/libraries/nixpkgs",
+        "type": "path"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
+        "path": "/home/freddy/Code/libraries/nixpkgs",
+        "type": "path"
       }
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1615483480,
-        "narHash": "sha256-Y5Bg5WXZf/jpfb0XTgsunt8GwtPXZhT7Ka3MNnA4IdQ=",
+        "lastModified": 1616628936,
+        "narHash": "sha256-AlrgEUkhV4nulv35iNV7iRIcssqvbjNg8+mf5B6SM2Q=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6be212cce73f4ce4f65375fbdebcf0b87b182bc0",
+        "rev": "d395190b24b27a65588f4539c423d9807ad8d4e7",
         "type": "github"
       },
       "original": {
