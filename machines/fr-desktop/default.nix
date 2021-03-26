@@ -41,6 +41,8 @@
   #programs.command-not-found.enable = true;
   programs.tmux.enable = true;
 
+  programs.steam.enable = true;
+
   #boot.kernelPackages = pkgs.linuxPackages_4_7;
 
   nix = {
@@ -140,13 +142,7 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; let
-    mysteam = steam.override {
-      extraPkgs = pkgs: [
-        wayland
-      ];
-    };
-  in [
+  environment.systemPackages = with pkgs; [
     arandr
 #    audacity
     #atom
@@ -189,8 +185,6 @@
     lm_sensors
     sshfs
     spotify
-    steam
-    steam-run
 #    (texlive.combined.scheme-medium)
     teams
     tmux
