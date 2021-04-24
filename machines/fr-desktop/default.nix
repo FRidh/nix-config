@@ -262,7 +262,7 @@
 
   # services.xrdp.enable = true;
 
-  # services.sabnzbd.enable = true;
+  services.sabnzbd.enable = true;
 
   #services.gitea.enable = true;
 
