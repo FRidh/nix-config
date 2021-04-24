@@ -38,6 +38,10 @@
     "aarch64-linux"
   ];
 
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = "1";
+  };
+
   #programs.command-not-found.enable = true;
   programs.tmux.enable = true;
 
