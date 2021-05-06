@@ -26,6 +26,12 @@
       specialArgs = { inherit inputs; };
     };
 
+    nixosConfigurations."fr-yoga" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ (import ./machines/fr-yoga/default.nix) ];
+      specialArgs = { inherit inputs; };
+    };
+
     nixosConfigurations."server2" = let
       #nixpkgs = nixpkgs-stable;
       #inputs = inputs // {inherit nixpkgs;};
