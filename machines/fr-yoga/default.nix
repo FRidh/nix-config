@@ -24,7 +24,7 @@
   ];
 
   programs.tmux.enable = true;
-  programs.steam.enable = false;
+  programs.steam.enable = true;
 
   nix = {
     trustedUsers = [ "root" "freddy" ];
@@ -139,7 +139,7 @@
     lm_sensors
     sshfs
     spotify
-    #teams
+    teams
     tmux
     unzip
     wget
