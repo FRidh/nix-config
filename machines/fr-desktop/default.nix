@@ -262,7 +262,33 @@
 
   # services.xrdp.enable = true;
 
+  services.nginx = {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+
+    virtualHosts."localhost" =  {
+      locations."/sabnzbd" = {
+        proxyPass = "http://127.0.0.1:8080/sabnzbd";
+      };
+      # locations."/radarr" = {
+      #   proxyPass = "http://127.0.0.1:7878/radarr";
+      # };
+      # locations."/bazarr" = {
+      #   proxyPass = "http://127.0.0.1:6767/bazarr";
+      # };
+      # locations."/jackett" = {
+      #   proxyPass = "http://127.0.0.1:9117/jackett";
+      # };
+    };
+  };
+
   services.sabnzbd.enable = true;
+  # services.radarr.enable = true;
+  # services.bazarr.enable = true;
+  # services.lidarr.enable = true;
+  # services.jackett.enable = true;
 
   #services.gitea.enable = true;
 
