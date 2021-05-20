@@ -6,10 +6,10 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-20.09";
     #nixpkgs.url = "github:WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
     #nixpkgs.url = "git+https://github.com/WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
-    #flake-utils.url = "github:numtide/flake-utils";
+    utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable } @ inputs: rec {
+  outputs = { self, nixpkgs, nixpkgs-stable, utils } @ inputs: rec {
 
     nixosConfigurations."fr-desktop" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -45,5 +45,37 @@
     };
 
     #packages.x86_64-linux.defaultPackage = nixosConfigurations."fr-desktop";
-  };
+  } // (utils.lib.eachSystem ["x86_64-linux" ] (system: rec {
+    packages = {
+      pythonEnv = nixpkgs.legacyPackages.${system}.python3.withPackages(ps: with ps; [
+        acoustics
+        bokeh
+        dask
+        datashader
+        flit
+        graphviz
+        holoviews
+        h5py
+        hvplot
+        ipython
+        jupyterlab
+        line_profiler
+        matplotlib
+        memory_profiler
+        netcdf4
+        notebook
+        numba
+        pandas
+        param
+        panel
+        pytest
+        scikitlearn
+        scipy
+        seaborn
+        toolz
+        xarray
+        zarr
+      ]);
+    };  
+  }));
 }
