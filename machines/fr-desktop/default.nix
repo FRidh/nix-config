@@ -167,10 +167,6 @@
     libreoffice
     ktorrent
     kwin-tiling
-#    niff
-#    nix-bash-completion
-#    nix-prefetch-scripts
-#     nix-repl
     nix-review
 #    nox
 #     openra
