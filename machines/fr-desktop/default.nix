@@ -34,9 +34,11 @@
   boot.cleanTmpDir = true;
   boot.devSize = "20GB";
 
-  boot.binfmt.emulatedSystems = [
-    "aarch64-linux"
-  ];
+  # WARNING: binfmt sets sandbox-paths which should be extra-sandbox-paths
+  # with nixUnstable!
+  # boot.binfmt.emulatedSystems = [
+  #   "aarch64-linux"
+  # ];
 
   #programs.command-not-found.enable = true;
   programs.tmux.enable = true;
