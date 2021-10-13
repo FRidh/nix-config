@@ -48,23 +48,18 @@
   #boot.kernelPackages = pkgs.linuxPackages_4_7;
 
   nix = {
-    binaryCachePublicKeys = [ "hydra.nixos.org-1:CNHJZBh9K4tP3EKF6FkkgeVYsS3ohTl+oS0Qa8bezVs=" "headcounter.org:/7YANMvnQnyvcVB6rgFTdb8p5LG1OTXaO+21CaOSBzg=" ];
-    trustedBinaryCaches = [ "https://hydra.nixos.org/" "https://headcounter.org/hydra/" ];
-    trustedUsers = [ "root" "freddy" ];
+    trustedUsers = [ "root" ];
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
       experimental-features = nix-command flakes ca-references
     '';
-    #nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
-#    useSandbox = "relaxed";
     buildCores = 8;
     maxJobs = 8;
     package = pkgs.nixUnstable;
   };
 
   networking.hostName = "fr-desktop"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
 
   networking.firewall.enable = false;
