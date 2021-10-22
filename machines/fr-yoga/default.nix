@@ -19,12 +19,12 @@
   boot.cleanTmpDir = true;
   boot.devSize = "20GB";
 
-  boot.binfmt.emulatedSystems = [
-    "aarch64-linux"
-  ];
+  # boot.binfmt.emulatedSystems = [
+  #   "aarch64-linux"
+  # ];
 
   programs.tmux.enable = true;
-  programs.steam.enable = true;
+  # programs.steam.enable = true;
 
   nix = {
     trustedUsers = [ "root" "freddy" ];
@@ -91,7 +91,7 @@
   # Collect data such as IO stats
   services.sysstat.enable = true;
 
-  services.ntp.enable = true;
+  # services.ntp.enable = true;
 
   # Running out of file descriptors
   # https://github.com/NixOS/nixpkgs/issues/101459#issuecomment-758306434
@@ -218,6 +218,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
+  system.stateVersion = "21.05"; # Did you read the comment?
 }
 
