@@ -11,7 +11,13 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.rtl88xxau-aircrack ];
+
+  boot.extraModprobeConfig = ''
+    options cfg80211 ieee80211_regdom="SE"
+  '';
+
+  hardware.wirelessRegulatoryDatabase = true;
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/5f4629cc-dccb-430a-8a93-01a2ff7ce924";
