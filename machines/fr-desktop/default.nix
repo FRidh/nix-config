@@ -45,7 +45,7 @@
 
   programs.steam.enable = true;
 
-  #boot.kernelPackages = pkgs.linuxPackages_4_7;
+  boot.kernelPackages = pkgs.linuxPackages_5_15;
 
   nix = {
     trustedUsers = [ "root" ];
