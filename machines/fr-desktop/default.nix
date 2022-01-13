@@ -177,7 +177,7 @@
 #    pandoc
     pavucontrol
     psmisc
-    (python3.withPackages(ps: with ps; [ ipython notebook jupyterlab numpy toolz pytest pandas holoviews hvplot matplotlib panel ]))
+#    (python3.withPackages(ps: with ps; [ ipython notebook jupyterlab numpy toolz pytest pandas holoviews hvplot matplotlib panel ]))
     lm_sensors
     sshfs
     spotify
