@@ -143,7 +143,7 @@
     tmux
     unzip
     wget
-    vlc_qt5
+    vlc
     vscode
     zip
     # KDE packages
