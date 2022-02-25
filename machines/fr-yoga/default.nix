@@ -31,7 +31,7 @@
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
-      experimental-features = nix-command flakes ca-references
+      experimental-features = nix-command flakes
     '';
     buildCores = 8;
     maxJobs = 8;

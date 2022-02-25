@@ -104,7 +104,7 @@ in
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
-      experimental-features = nix-command flakes ca-references
+      experimental-features = nix-command flakes
     '';
     #nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
     package = pkgs.nixUnstable;
