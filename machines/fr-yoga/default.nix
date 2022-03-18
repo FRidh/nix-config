@@ -17,7 +17,7 @@
 
   boot.tmpOnTmpfs = true;
   boot.cleanTmpDir = true;
-  boot.devSize = "20GB";
+  #boot.devSize = "20GB";
 
   # boot.binfmt.emulatedSystems = [
   #   "aarch64-linux"
