@@ -52,11 +52,10 @@
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
-      experimental-features = nix-command flakes ca-references
+      experimental-features = nix-command flakes
     '';
     buildCores = 8;
     maxJobs = 8;
-    package = pkgs.nixUnstable;
   };
 
   networking.hostName = "fr-desktop"; # Define your hostname.
@@ -186,7 +185,7 @@
     tmux
     unzip
     wget
-    vlc_qt5
+    vlc
     vscode
     zip
     # KDE packages

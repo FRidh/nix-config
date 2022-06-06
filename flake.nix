@@ -2,14 +2,14 @@
   description = "Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-21.05";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-22.05";
+    #nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-21.05";
     #nixpkgs.url = "github:WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
     #nixpkgs.url = "git+https://github.com/WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, utils } @ inputs: rec {
+  outputs = { self, nixpkgs, utils } @ inputs: rec {
 
     nixosConfigurations."fr-desktop" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";

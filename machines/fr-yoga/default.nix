@@ -35,7 +35,6 @@
     '';
     buildCores = 8;
     maxJobs = 8;
-    package = pkgs.nixUnstable;
   };
 
   networking.hostName = "fr-yoga"; # Define your hostname.

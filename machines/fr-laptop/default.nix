@@ -107,7 +107,6 @@ in
       experimental-features = nix-command flakes
     '';
     #nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ]; # Use own repository!
-    package = pkgs.nixUnstable;
 
     #buildMachines = [
     #  { hostName = "178.249.150.224";
@@ -268,7 +267,7 @@ in
     tmux
     #usbutils
     wget
-    #vlc_qt5
+    vlc
     zip
     unzip
     # KDE packages
