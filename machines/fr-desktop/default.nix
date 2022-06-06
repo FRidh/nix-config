@@ -32,7 +32,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.tmpOnTmpfs = true;
   boot.cleanTmpDir = true;
-  boot.devSize = "20GB";
+#  boot.devSize = "20GB";
 
   # WARNING: binfmt sets sandbox-paths which should be extra-sandbox-paths
   # with nixUnstable!
