@@ -148,7 +148,7 @@
     unzip
     wget
     vlc
-    vscode-fhs
+    vscode #-fhs
     #(vscode-fhsWithPackages (ps: with vscode-extensions; [ ms-python.python ms-vscode-remote.remote-ssh eamodio.gitlens ]))
     zip
     # KDE packages
