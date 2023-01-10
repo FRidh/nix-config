@@ -23,6 +23,11 @@
   #   "aarch64-linux"
   # ];
 
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
   programs.tmux.enable = true;
   # programs.steam.enable = true;
 
@@ -143,7 +148,8 @@
     unzip
     wget
     vlc
-    vscode
+    vscode-fhs
+    #(vscode-fhsWithPackages (ps: with vscode-extensions; [ ms-python.python ms-vscode-remote.remote-ssh eamodio.gitlens ]))
     zip
     # KDE packages
     ark
@@ -189,7 +195,7 @@
   services.telepathy.enable = true;
 
   # TLP Linux Advanced Power Management
-  services.tlp.enable = true;
+  # services.tlp.enable = true;
 
   system.autoUpgrade = {
     #channel = "https://nixos.org/channels/nixos-unstable";
@@ -209,6 +215,7 @@
     home = "/home/freddy";
     description = "Frederik Rietdijk";
     extraGroups = [ "wheel" "networkmanager" "audio" ];
+    autoSubUidGidRange = true;
   };
 
   # This value determines the NixOS release from which the default
