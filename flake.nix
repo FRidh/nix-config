@@ -2,7 +2,7 @@
   description = "Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-22.05";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-22.11";
     nixos-2111.url = "github:nixos/nixpkgs?ref=nixos-21.11";
     #nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-21.05";
     #nixpkgs.url = "github:WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
