@@ -49,6 +49,7 @@
         sshUser = "nash";
         hostName = "nash-macbook";
         protocol = "ssh-ng";
+        supportedFeatures = [ "ca-derivations" ];
       }
     ];
     distributedBuilds = true;
