@@ -38,9 +38,20 @@
       gc-keep-outputs = true
       gc-keep-derivations = true
       experimental-features = nix-command flakes impure-derivations ca-derivations
+      builders-use-substitutes = true
     '';
     buildCores = 8;
     maxJobs = 8;
+    buildMachines = [
+      {
+        system = "aarch64-darwin";
+        maxJobs = 8;
+        sshUser = "nash";
+        hostName = "nash-macbook";
+        protocol = "ssh-ng";
+      }
+    ];
+    distributedBuilds = true;
   };
 
   networking.hostName = "fr-yoga"; # Define your hostname.
