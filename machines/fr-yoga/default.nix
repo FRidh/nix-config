@@ -23,10 +23,11 @@
   #   "aarch64-linux"
   # ];
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-  };
+#  virtualisation.podman = {
+#    enable = true;
+#    dockerCompat = true;
+#  };
+  virtualisation.docker.enable = true;
 
   programs.tmux.enable = true;
   # programs.steam.enable = true;
@@ -214,7 +215,7 @@
     uid = 1000;
     home = "/home/freddy";
     description = "Frederik Rietdijk";
-    extraGroups = [ "wheel" "networkmanager" "audio" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "docker" ];
     autoSubUidGidRange = true;
   };
 
