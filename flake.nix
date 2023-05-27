@@ -3,18 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-22.11";
-    nixos-2111.url = "github:nixos/nixpkgs?ref=nixos-21.11";
-    #nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-21.05";
-    #nixpkgs.url = "github:WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
-    #nixpkgs.url = "git+https://github.com/WilliButz/nixpkgs?ref=codimd/fix-sqlite/node12";
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, nixos-2111, utils } @ inputs: rec {
+  outputs = { self, nixpkgs, utils } @ inputs: rec {
 
-    nixosConfigurations."fr-desktop" = let
-      nixpkgs = nixos-2111;
-    in nixpkgs.lib.nixosSystem {
+    nixosConfigurations."fr-desktop" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         (import ./machines/fr-desktop/default.nix)

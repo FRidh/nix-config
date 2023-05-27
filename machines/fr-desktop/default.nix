@@ -43,16 +43,17 @@
   #programs.command-not-found.enable = true;
   programs.tmux.enable = true;
 
-  programs.steam.enable = true;
+  programs.steam.enable = false;
 
-  boot.kernelPackages = pkgs.linuxPackages_5_15;
+  # boot.kernelPackages = pkgs.linuxPackages_5_15;
 
   nix = {
-    trustedUsers = [ "root" ];
+    trustedUsers = [ "root" "freddy" ];
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes impure-derivations ca-derivations
+      builders-use-substitutes = true
     '';
     buildCores = 8;
     maxJobs = 8;
@@ -169,19 +170,15 @@
     libreoffice
     ktorrent
     kwin-tiling
-    nix-review
 #    nox
 #     openra
 #    openttd
 #    pandoc
     pavucontrol
     psmisc
-#    (python3.withPackages(ps: with ps; [ ipython notebook jupyterlab numpy toolz pytest pandas holoviews hvplot matplotlib panel ]))
     lm_sensors
     sshfs
     spotify
-#    (texlive.combined.scheme-medium)
-    teams
     tmux
     unzip
     wget
@@ -194,8 +191,6 @@
     gwenview
     kate
     kdeconnect
-    kile
-    konversation
     spectacle
     plasma-desktop
     kolourpaint
@@ -352,7 +347,7 @@
   services.telepathy.enable = true;
 
   # TLP Linux Advanced Power Management
-  services.tlp.enable = true;
+  # services.tlp.enable = true;
 
   system.autoUpgrade = {
     #channel = "https://nixos.org/channels/nixos-unstable";
