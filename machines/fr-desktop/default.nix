@@ -155,7 +155,7 @@
     iotop
     ffmpeg
     file
-    firefox-bin
+    firefox
     fzf # fuzzy finder
     gitFull
     git-cola
