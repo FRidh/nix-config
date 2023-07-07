@@ -67,13 +67,19 @@
   #networking.interfaces.wlp1s0.useDHCP = true;
 
   hardware.pulseaudio = {
-    enable = true;
+    enable = false;
     support32Bit = true;
     package = pkgs.pulseaudioFull;
     zeroconf.discovery.enable = true;
     zeroconf.publish.enable = true;
     tcp.enable = true;
     tcp.anonymousClients.allowAll = true;
+  };
+
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    pulse.enable = true;
   };
 
   hardware.opengl = {
@@ -179,6 +185,7 @@
     yakuake
     kompare
     filelight
+    kmix
   ];
 
   # List services that you want to enable:
