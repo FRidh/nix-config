@@ -362,7 +362,7 @@
     uid = 1000;
     home = "/home/freddy";
     description = "Frederik Rietdijk";
-    extraGroups = [ "wheel" "networkmanager" "audio" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" ];
   };
 
   #users.users = let
