@@ -215,7 +215,7 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-  services.tailscale.enable = true;
+  services.tailscale.enable = false;
 
   #systemd.services.code-server = {
   #  enable = true;
