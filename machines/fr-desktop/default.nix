@@ -150,13 +150,8 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     arandr
-#    audacity
-    #atom
-    #chromium
     bfs
     binutils
-    #cachix
-    #diffoscope
     iftop
     iotop
     ffmpeg
@@ -176,11 +171,6 @@
     libreoffice
     ktorrent
     kwin-tiling
-#    nox
-#     openra
-#    openttd
-#    pandoc
-    pavucontrol
     psmisc
     lm_sensors
     sshfs
