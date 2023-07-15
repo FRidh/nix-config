@@ -69,8 +69,14 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 
-  hardware.pulseaudio = {
+  services.pipewire = {
     enable = true;
+    audio.enable = true;
+    pulse.enable = true;
+  };
+
+  hardware.pulseaudio = {
+    enable = false;
     support32Bit = true;
     package = pkgs.pulseaudioFull;
     zeroconf.discovery.enable = true;
