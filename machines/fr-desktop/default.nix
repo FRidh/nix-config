@@ -372,10 +372,10 @@
   #  };
   #in map addNixBuildUserData (lib.range 1 config.nix.nrBuildUsers);
 
-  users.extraUsers.nix-builder-home = {
-    isNormalUser = true;
-    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCcl9KaDNV58UPTrtGRcqVEhhrMWfRDlixY13Eq9tbzi/2Wukl9Wxyq32/Li/Wb8OCfy5/YKd54DJYxO6NNEpB5sbrSuHKamzvcf860Ka8dSnkNOcgcW7/cb6oLeG7mi8hxVoxEEflbakVj019aZ9pp4VKvujcF8Vz9ZiSgH5B+Yr550xPy2/TwyLEnsJOgExP/zvZOjCGHc4KomtH/sfVrO4in7NXzoB5wYBTk7mrOchBPpoITGPTT6BG7DRzHHArXbnuEqFxht3HGvE/FLmdri28u/WN8uzWKxrpG1UTjLavByX/uc7DOepQwsFmEnsIgKJ/9d6iNNuyE91+hd/Ej root@fr-laptop" ];
-  };
+  # users.extraUsers.nix-builder-home = {
+  #   isNormalUser = true;
+  #   openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCcl9KaDNV58UPTrtGRcqVEhhrMWfRDlixY13Eq9tbzi/2Wukl9Wxyq32/Li/Wb8OCfy5/YKd54DJYxO6NNEpB5sbrSuHKamzvcf860Ka8dSnkNOcgcW7/cb6oLeG7mi8hxVoxEEflbakVj019aZ9pp4VKvujcF8Vz9ZiSgH5B+Yr550xPy2/TwyLEnsJOgExP/zvZOjCGHc4KomtH/sfVrO4in7NXzoB5wYBTk7mrOchBPpoITGPTT6BG7DRzHHArXbnuEqFxht3HGvE/FLmdri28u/WN8uzWKxrpG1UTjLavByX/uc7DOepQwsFmEnsIgKJ/9d6iNNuyE91+hd/Ej root@fr-laptop" ];
+  # };
 
   # The NixOS release to be compatible with for stateful data such as databases.
   # system.stateVersion = "16.09";
