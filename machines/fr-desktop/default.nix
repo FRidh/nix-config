@@ -91,8 +91,6 @@
     extraPackages = with pkgs; [ vaapiVdpau ];
   };
 
-  #hardware.nvidia.package = config.boot.kernelPackages.nvidia_x11_legacy390; # _legacy304;
-
   # Select internationalisation properties.
   # i18n = {
   #   consoleFont = "Lat2-Terminus16";
@@ -209,7 +207,6 @@
   services.xserver.enable = true;
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "eurosign:e";
-  services.xserver.videoDrivers = ["nvidia"];
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
