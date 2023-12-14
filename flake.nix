@@ -2,7 +2,7 @@
   description = "Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
     utils.url = "github:numtide/flake-utils";
   };
 

@@ -155,14 +155,13 @@
     libreoffice
     ktorrent
     kwin-tiling
-    nix-review
+    nixpkgs-review
     pavucontrol
     psmisc
     (python3.withPackages(ps: with ps; [ ipython notebook jupyterlab numpy toolz pytest pandas holoviews hvplot matplotlib panel ]))
     lm_sensors
     sshfs
     spotify
-    teams
     tmux
     unzip
     wget
