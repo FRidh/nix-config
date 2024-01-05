@@ -73,6 +73,7 @@
     enable = true;
     audio.enable = true;
     pulse.enable = true;
+    alsa.enable = true;
   };
 
   hardware.pulseaudio = {
@@ -90,6 +91,8 @@
     driSupport32Bit = true;
     extraPackages = with pkgs; [ vaapiVdpau ];
   };
+
+  hardware.bluetooth.enable = true;
 
   # Select internationalisation properties.
   # i18n = {
@@ -375,7 +378,7 @@
   # };
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  # system.stateVersion = "16.09";
+  system.stateVersion = "23.11";
 
 }
 
