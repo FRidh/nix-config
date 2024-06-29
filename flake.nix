@@ -17,12 +17,6 @@
 #      specialArgs = { inherit inputs; };
     };
 
-    nixosConfigurations."fr-laptop" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [ (import ./machines/fr-laptop/default.nix) ];
-#      specialArgs = { inherit inputs; };
-    };
-
     nixosConfigurations."fr-yoga" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [ (import ./machines/fr-yoga/default.nix) ];
