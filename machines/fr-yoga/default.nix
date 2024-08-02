@@ -15,8 +15,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.tmpOnTmpfs = true;
-  boot.cleanTmpDir = true;
+  boot.tmp.useTmpfs = true;
+  boot.tmp.cleanOnBoot = true;
   #boot.devSize = "20GB";
 
   # boot.binfmt.emulatedSystems = [
@@ -33,26 +33,26 @@
   # programs.steam.enable = true;
 
   nix = {
-    trustedUsers = [ "root" "freddy" ];
+    settings.trusted-users = [ "root" "freddy" ];
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
       experimental-features = nix-command flakes impure-derivations ca-derivations
       builders-use-substitutes = true
     '';
-    buildCores = 8;
-    maxJobs = 8;
-    buildMachines = [
-      {
-        system = "aarch64-darwin";
-        maxJobs = 8;
-        sshUser = "nash";
-        hostName = "nash-macbook";
-        protocol = "ssh-ng";
-        supportedFeatures = [ "ca-derivations" ];
-      }
-    ];
-    distributedBuilds = true;
+    settings.cores = 8;
+    settings.max-jobs = 8;
+    # buildMachines = [
+    #   {
+    #     system = "aarch64-darwin";
+    #     maxJobs = 8;
+    #     sshUser = "nash";
+    #     hostName = "nash-macbook";
+    #     protocol = "ssh-ng";
+    #     supportedFeatures = [ "ca-derivations" ];
+    #   }
+    # ];
+    # distributedBuilds = true;
   };
 
   networking.hostName = "fr-yoga"; # Define your hostname.
@@ -191,7 +191,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.forwardX11 = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;

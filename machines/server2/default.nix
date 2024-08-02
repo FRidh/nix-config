@@ -12,7 +12,6 @@
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   # boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
@@ -20,12 +19,12 @@
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
 
   nix = {
-    trustedUsers = [ "root" "freddy" ];
+    settings.trusted-users = [ "root" "freddy" ];
+    settings.max-jobs = 1;
     gc.automatic = true;
     extraOptions = ''
       experimental-features = nix-command flakes ca-references
     '';
-    package = pkgs.nixUnstable;
   };
 
   networking.hostName = "server2"; # Define your hostname.

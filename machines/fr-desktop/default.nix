@@ -23,15 +23,14 @@
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = false;
-  boot.loader.grub.version = 2;
   # Define on which hard drive you want to install Grub.
   # boot.loader.grub.device = "/dev/sda";
 #  boot.loader.gummiboot.enable = true;
   boot.loader.systemd-boot.enable = true;
 #  boot.loader.efi.efibootmgr.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.tmpOnTmpfs = true;
-  boot.cleanTmpDir = true;
+  boot.tmp.useTmpfs = true;
+  boot.tmp.cleanOnBoot = true;
 #  boot.devSize = "20GB";
 
   # WARNING: binfmt sets sandbox-paths which should be extra-sandbox-paths
@@ -48,15 +47,15 @@
   # boot.kernelPackages = pkgs.linuxPackages_5_15;
 
   nix = {
-    trustedUsers = [ "root" "freddy" ];
+    settings.trusted-users = [ "root" "freddy" ];
     extraOptions = ''
       gc-keep-outputs = true
       gc-keep-derivations = true
       experimental-features = nix-command flakes impure-derivations ca-derivations
       builders-use-substitutes = true
     '';
-    buildCores = 8;
-    maxJobs = 8;
+    settings.cores = 8;
+    settings.max-jobs = 8;
   };
 
   networking.hostName = "fr-desktop"; # Define your hostname.
@@ -202,7 +201,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.forwardX11 = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
