@@ -23,18 +23,6 @@
 #      specialArgs = { inherit inputs; };
     };
 
-    nixosConfigurations."server2" = let
-      #nixpkgs = nixpkgs-stable;
-      #inputs = inputs // {inherit nixpkgs;};
-    in nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        (import ./machines/server2/default.nix)
-        (builtins.toPath "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix")
-      ];
-#      specialArgs = { inherit inputs; };
-    };
-
     #packages.x86_64-linux.defaultPackage = nixosConfigurations."fr-desktop";
   } // (utils.lib.eachSystem ["x86_64-linux" ] (system: rec {
     packages = {
