@@ -82,9 +82,8 @@
     pulse.enable = true;
   };
 
-  hardware.opengl = {
-    driSupport = true;
-    driSupport32Bit = true;
+  hardware.graphics = {
+    enable32Bit = true;
   };
 
   hardware.bluetooth.enable = true;
@@ -174,7 +173,7 @@
     fish
     gwenview
     kate
-    kdeconnect
+    plasma5Packages.kdeconnect-kde
     kile
     konversation
     spectacle
