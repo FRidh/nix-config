@@ -94,6 +94,8 @@
     allowUnfree = true;
   };
 
+  programs.adb.enable = true;
+
   # programs.fish.enable = true;
 
   # To fix nix-shell with certificates
@@ -231,7 +233,7 @@
     uid = 1000;
     home = "/home/freddy";
     description = "Frederik Rietdijk";
-    extraGroups = [ "wheel" "networkmanager" "audio" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" "docker" "adbusers" ];
     autoSubUidGidRange = true;
   };
 
