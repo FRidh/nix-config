@@ -56,6 +56,7 @@
     '';
     settings.cores = 8;
     settings.max-jobs = 8;
+    settings.max-substitution-jobs = 128;
   };
 
   networking.hostName = "fr-desktop"; # Define your hostname.
@@ -73,10 +74,9 @@
     audio.enable = true;
     pulse.enable = true;
     alsa.enable = true;
-    # alsa.support32Bit = true;
   };
 
-  hardware.pulseaudio = {
+  services.pulseaudio = {
     enable = false;
     support32Bit = true;
     package = pkgs.pulseaudioFull;
@@ -86,9 +86,8 @@
     tcp.anonymousClients.allowAll = true;
   };
 
-  hardware.opengl = {
-    driSupport = true;
-    driSupport32Bit = true;
+  hardware.graphics = {
+    enable32Bit = true;
     extraPackages = with pkgs; [ vaapiVdpau ];
   };
 
@@ -114,14 +113,12 @@
     allowUnfree = true;
   };
 
-  # programs.fish.enable = true;
-
   # To fix nix-shell with certificates
   environment.variables."SSL_CERT_FILE" = "/etc/ssl/certs/ca-bundle.crt";
 
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     publish.enable = true;
     publish.addresses = true;
     publish.workstation = true;
@@ -149,53 +146,52 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     arandr
     bfs
     binutils
-    iftop
-    iotop
     ffmpeg
     file
     firefox
     fzf # fuzzy finder
-    gitFull
     git-cola
     gitAndTools.hub
+    gitFull
     gnumake
     google-chrome
     htop
     iftop
+    iftop
     imagemagick
+    iotop
     iotop
     jq
     libreoffice
-    ktorrent
-    kwin-tiling
-    psmisc
     lm_sensors
-    sshfs
+    psmisc
     spotify
+    sshfs
     tmux
     unzip
-    wget
     vlc
     vscode
+    wget
     zip
+  ]) ++ (with pkgs.kdePackages; [
     # KDE packages
     ark
-    fish
+    filelight
     gwenview
     kate
-    kdeconnect
-    spectacle
-    plasma-desktop
+    kdeconnect-kde
     kolourpaint
-    okular
-    yakuake
     kompare
-    filelight
-  ];
+    ktorrent
+    okular
+    plasma-desktop
+    spectacle
+    yakuake
+  ]);
 
   # List services that you want to enable:
 
@@ -212,7 +208,7 @@
 
   # Enable the KDE Desktop Environment.
   services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   services.tailscale.enable = false;
 
@@ -357,7 +353,6 @@
 
   users.extraUsers.freddy = {
     isNormalUser = true;
-#    shell = pkgs.fish;
     uid = 1000;
     home = "/home/freddy";
     description = "Frederik Rietdijk";

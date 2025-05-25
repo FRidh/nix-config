@@ -2,14 +2,14 @@
   description = "Configuration";
 
   inputs = {
-    nixos-2405.url = "github:nixos/nixpkgs?ref=nixos-24.05";
+    nixos-2505.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     nixos-2411.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixos-2405, nixos-2411, utils } @ inputs: rec {
+  outputs = { self, nixos-2505, nixos-2411, utils } @ inputs: rec {
 
-    nixosConfigurations."fr-desktop" = nixos-2405.lib.nixosSystem {
+    nixosConfigurations."fr-desktop" = nixos-2505.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         (import ./machines/fr-desktop/default.nix)
@@ -27,7 +27,7 @@
     #packages.x86_64-linux.defaultPackage = nixosConfigurations."fr-desktop";
   } // (utils.lib.eachSystem ["x86_64-linux" ] (system: rec {
     packages = let
-      nixpkgs = nixos-2405;
+      nixpkgs = nixos-2505;
     in {
       pythonEnv = nixpkgs.legacyPackages.${system}.python3.withPackages(ps: with ps; [
         acoustics
