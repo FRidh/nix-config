@@ -42,6 +42,7 @@
     '';
     settings.cores = 8;
     settings.max-jobs = 8;
+    settings.max-substitution-jobs = 128;
     # buildMachines = [
     #   {
     #     system = "aarch64-darwin";
@@ -66,7 +67,7 @@
   #networking.interfaces.enp3s0f4u1u1.useDHCP = true;
   #networking.interfaces.wlp1s0.useDHCP = true;
 
-  hardware.pulseaudio = {
+  services.pulseaudio = {
     enable = false;
     support32Bit = true;
     package = pkgs.pulseaudioFull;
@@ -131,7 +132,7 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     arandr
     audacity
     bfs
@@ -154,8 +155,6 @@
     iotop
     jq
     libreoffice
-    ktorrent
-    kwin-tiling
     nixpkgs-review
     pavucontrol
     psmisc
@@ -170,23 +169,21 @@
     vscode #-fhs
     #(vscode-fhsWithPackages (ps: with vscode-extensions; [ ms-python.python ms-vscode-remote.remote-ssh eamodio.gitlens ]))
     zip
+  ]) ++ (with pkgs.kdePackages; [
     # KDE packages
     ark
-    fish
+    filelight
     gwenview
     kate
-    plasma5Packages.kdeconnect-kde
-    kile
-    konversation
-    spectacle
-    plasma-desktop
+    kdeconnect-kde
     kolourpaint
-    okular
-    yakuake
     kompare
-    filelight
-    kmix
-  ];
+    ktorrent
+    okular
+    plasma-desktop
+    spectacle
+    yakuake
+  ]);
 
   # List services that you want to enable:
 
@@ -203,7 +200,7 @@
   
   # Enable the KDE Desktop Environment.
   services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   services.tailscale.enable = true;
   services.locate = {

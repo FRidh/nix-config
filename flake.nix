@@ -3,11 +3,10 @@
 
   inputs = {
     nixos-2505.url = "github:nixos/nixpkgs?ref=nixos-25.05";
-    nixos-2411.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixos-2505, nixos-2411, utils } @ inputs: rec {
+  outputs = { self, nixos-2505, utils } @ inputs: rec {
 
     nixosConfigurations."fr-desktop" = nixos-2505.lib.nixosSystem {
       system = "x86_64-linux";
@@ -18,7 +17,7 @@
 #      specialArgs = { inherit inputs; };
     };
 
-    nixosConfigurations."fr-yoga" = nixos-2411.lib.nixosSystem {
+    nixosConfigurations."fr-yoga" = nixos-2505.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [ (import ./machines/fr-yoga/default.nix) ];
 #      specialArgs = { inherit inputs; };
